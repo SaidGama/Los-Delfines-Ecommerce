@@ -53,5 +53,4 @@ public String getNombre() {
 	public String toString() {
 		return "Administradores [nombre=" + nombre + ", correo=" + correo + ", contrasena=" + contrasena + ", id=" + id + "]";
 	}//to string
-
 }//class administradores
