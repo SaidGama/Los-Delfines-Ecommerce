@@ -18,6 +18,8 @@ public class Categorias {
     public Categorias(){
         this.id = Categorias.total;
     }
+
+    
     public long getId() {
         return id;
     }
