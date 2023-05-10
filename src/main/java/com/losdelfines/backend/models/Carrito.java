@@ -7,8 +7,7 @@ public class Carrito {
 	private long usuario_id;
 	private static long total = 0;
 
-	public Carrito(long id, long usuario_id) {
-		this.id = id;
+	public Carrito(long usuario_id) {
 		this.usuario_id = usuario_id;
 		total++;
 		id = Carrito.total;
