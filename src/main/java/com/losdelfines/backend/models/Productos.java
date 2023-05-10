@@ -19,7 +19,10 @@ public class Productos {
 		this.id = Productos.total;
 	}
 	
-	public Productos() {}
+	public Productos() {
+		total ++;
+		this.id =(Productos.total);
+	}
 	public String getNombre() {
 		return nombre;
 	}
