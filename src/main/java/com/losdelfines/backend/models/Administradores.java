@@ -1,13 +1,13 @@
 package com.losdelfines.backend.models;
 
 public class Administradores {
-    private long id;
     private String nombre;
     private String correo;
     private String contrasena;
+    private long id;
     private static long total=0;
 
-    public Administradores(long id, String nombre, String correo, String contrasena) {
+    public Administradores(String nombre, String correo, String contrasena) {
         super();
         this.nombre = nombre;
         this.correo = correo;
