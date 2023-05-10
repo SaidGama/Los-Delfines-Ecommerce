@@ -1,5 +1,5 @@
 package com.losdelfines.backend.models;
-
+//POJO - Plain Old Java Object
 public class Usuarios {
 	private String nombre;
 	private String correo;
@@ -8,14 +8,15 @@ public class Usuarios {
 	private String telefono;
 	private long id;
 	private static long total=0;
-	public Usuarios(String nombre, String correo, String domicilio, String contraseña, String telefono, long id) {
+	public Usuarios(String nombre, String correo, String domicilio, String contraseña, String telefono) {
 		super();
 		this.nombre = nombre;
 		this.correo = correo;
 		this.domicilio = domicilio;
 		this.contraseña = contraseña;
 		this.telefono = telefono;
-		this.id = id;
+		total++;
+		this.id=Usuarios.total;
 	}//constructor
 	
 	public Usuarios() {	}//constructor default
