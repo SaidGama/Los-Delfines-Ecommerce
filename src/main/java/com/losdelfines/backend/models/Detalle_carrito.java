@@ -7,8 +7,7 @@ public class Detalle_carrito {
 	private long carrito_id;
 	private long cantidad;
 	private static long total = 0;
-	public Detalle_carrito(long id, long productos_id, long carrito_id, long cantidad) {
-		this.id = id;
+	public Detalle_carrito(long productos_id, long carrito_id, long cantidad) {	
 		this.productos_id = productos_id;
 		this.carrito_id = carrito_id;
 		this.cantidad = cantidad;
@@ -66,12 +65,6 @@ public class Detalle_carrito {
 		return "Detalle_carrito [id=" + id + ", productos_id=" + productos_id + ", carrito_id=" + carrito_id
 				+ ", cantidad=" + cantidad + "]";
 	}//toString
+
 	
-	
-	
-	
-	
-	
-	
-	
-}
+}// Detalle_carrito
