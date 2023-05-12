@@ -1,67 +1,53 @@
 package com.losdelfines.backend.services;
-
-import java.util.ArrayList;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.losdelfines.backend.models.Productos;
+import com.losdelfines.backend.repositories.ProductosRepository;
 
 @Service
 public class ProductosServices {
-    private final ArrayList<Productos> lista = new ArrayList<>();
+    private final ProductosRepository productosRepository;
     @Autowired
-    public ProductosServices() {
-    	lista.add(new Productos("Garrafón de agua", "Rellenado de garrafón de 20lts de agua purificada", 25.0, 999));
-    	lista.add(new Productos("Dispensador de agua", "Dispensador para garrafon de agua", 110.0, 150));
-    	lista.add(new Productos("Dispensador de agua clásico", "Dispensador de agua clásico de ceramica", 169.0, 200));
-    	lista.add(new Productos("Agua - 5lts", "Botellón de 5lts con agua purificada", 27.5, 200));
-    	lista.add(new Productos("Agua - Pack 6pzs 1lt", "Paquete con 6 botellas de 1lt", 39.99, 200));
-    	lista.add(new Productos("Filtro de agua", "Filtro de agua portátil", 109.95, 200));
+    public ProductosServices(ProductosRepository productosRepository) {
+    	this.productosRepository = productosRepository;
     }//constructor
     
-    public ArrayList<Productos> getAllProductos(){
-    	return lista;
+    public List<Productos> getAllProductos(){
+    	return productosRepository.findAll();
     }//getAll
     
     public Productos getProducto(Long id) {
-		Productos tmpProd = null;
-		for(Productos producto : lista) {
-			if (producto.getId()==id) {
-				tmpProd = producto;
-			}//if
-		}//foreach
-		return tmpProd;
+		return productosRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("El producto con el id: " + id + " no existe.")
+			);
 	}//getProducto
     
     public Productos deleteProducto(Long id) {
     	Productos tmpProd = null;
-		for(Productos producto : lista) {
-			if (producto.getId()==id) {
-				tmpProd = lista.remove(lista.indexOf(producto));
-				break;
+			if (productosRepository.existsById(id)) {
+				tmpProd = productosRepository.findById(id).get();
+				productosRepository.deleteById(id);
 			}//if
-		}//foreach
 		return tmpProd;
 	}//deleteProducto
     
     public Productos addproducto(Productos producto) {
-		lista.add(producto);
-		return producto;
+		return productosRepository.save(producto);
 	}//addProducto
     
     public Productos updateProducto(Long id, String nombre, String descripcion, Double precio, Long stock) {
     	Productos tmpProd = null;
-		for(Productos producto : lista) {
-			if (producto.getId()==id) {
-				if (nombre!=null)producto.setNombre(nombre);
-				if (descripcion!=null)producto.setDescripcion(descripcion);
-				if (stock!=null)producto.setStock(stock);
-				if (precio!=null)producto.setPrecio(precio.doubleValue());
-				tmpProd = lista.remove(lista.indexOf(producto));
-				break;
-			}//if
-		}//foreach
+		if(productosRepository.existsById(id)) {
+			tmpProd = productosRepository.findById(id).get();
+				if (nombre!=null)tmpProd.setNombre(nombre);
+				if (descripcion!=null)tmpProd.setDescripcion(descripcion);
+				if (stock!=null)tmpProd.setStock(stock);
+				if (precio!=null)tmpProd.setPrecio(precio.doubleValue());
+				productosRepository.save(tmpProd);
+			} else {
+				System.out.println("Update - El producto con el id: " + id + " no existe");
+			}
 		return tmpProd;
 	}//updateProducto
 }
