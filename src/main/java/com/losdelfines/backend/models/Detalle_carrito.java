@@ -1,23 +1,36 @@
 package com.losdelfines.backend.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "detalle_carrito")
 public class Detalle_carrito {
-    
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private long id;
+	@Column(nullable = false)
 	private long productos_id;
+	@Column(nullable = false)
 	private long carrito_id;
+	@Column(nullable = false)
 	private long cantidad;
-	private static long total = 0;
-	public Detalle_carrito(long productos_id, long carrito_id, long cantidad) {	
+	
+	public Detalle_carrito(long id, long productos_id, long carrito_id, long cantidad) {
+		super();
+		this.id = id;
 		this.productos_id = productos_id;
 		this.carrito_id = carrito_id;
 		this.cantidad = cantidad;
-		total++;
-		id = Detalle_carrito.total;
-	}// constructor 
-	
+	}//constructor
+
 	public Detalle_carrito() {
-		total++;
-		id = Detalle_carrito.total;
 	}// constructor default
 
 	public long getId() {
@@ -52,19 +65,10 @@ public class Detalle_carrito {
 		this.cantidad = cantidad;
 	}//setCantidad
 
-	public static long getTotal() {
-		return total;
-	}//getTotal
-
-	public static void setTotal(long total) {
-		Detalle_carrito.total = total;
-	}//setTotal
-
 	@Override
 	public String toString() {
 		return "Detalle_carrito [id=" + id + ", productos_id=" + productos_id + ", carrito_id=" + carrito_id
 				+ ", cantidad=" + cantidad + "]";
 	}//toString
 
-	
 }// Detalle_carrito

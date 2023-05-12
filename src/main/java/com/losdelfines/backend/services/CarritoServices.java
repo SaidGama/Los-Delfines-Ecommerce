@@ -1,73 +1,57 @@
 package com.losdelfines.backend.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.losdelfines.backend.models.Carrito;
+import com.losdelfines.backend.repositories.CarritoRepository;
 
 @Service
 public class CarritoServices {
 
-	public final ArrayList<Carrito> lista = new ArrayList<>();
+//	public final ArrayList<Carrito> lista = new ArrayList<>();
+	private final CarritoRepository carritoRepository;
 
-	public CarritoServices() {
-		lista.add(new Carrito(1));
-		lista.add(new Carrito(2));
-		lista.add(new Carrito(3));
+	@Autowired
+	public CarritoServices(CarritoRepository carritoRepository) {
+		this.carritoRepository = carritoRepository;
 	}// constructor
 
-	public ArrayList<Carrito> getAllCarritos() {
-		return lista;
+	public List<Carrito> getAllCarritos() {
+		return carritoRepository.findAll();
 	}// getAllCarritos
 
 	public Carrito getCarrito(Long id) {
-		Carrito tmpCart = null;
-		for (Carrito carrito : lista) {
-			if (carrito.getId() == id) {
-				tmpCart = carrito;
-			} // if
-		} // foreach
-		return tmpCart;
+		return carritoRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Usuario con id " + id + " no existe"));
 	}// getCarrito
 
 	public Carrito deleteCarrito(Long id) {
-		
 		Carrito tmpCart = null;
-		for (Carrito carrito : lista) {
-			if (carrito.getId() == id) {
-				tmpCart = lista.remove(lista.indexOf(carrito));
-			} // if
-		} // foreach
+		if (carritoRepository.existsById(id)) {
+			tmpCart = carritoRepository.findById(id).get();
+			carritoRepository.deleteById(id);
+		} // if
 		return tmpCart;
-		
-	}//deleteCarrito
+	}// deleteCarrito
 
 	public Carrito addCarrito(Carrito carrito) {
-	lista.add(carrito);
-	return carrito;
-		
-	}//addCarrito
+		return carritoRepository.save(carrito);
+	}// addCarrito
 
 	public Carrito updateCarrito(Long id, Long usuario_id) {
-		
 		Carrito tmpCart = null;
-		for (Carrito carrito : lista) {
-			if (carrito.getId() == id) {
-				if (usuario_id != null)
-					carrito.setUsuario_id(usuario_id);
-				tmpCart = carrito;
-				break;
-			} // if
-		} // foreach
+		
+		if(carritoRepository.existsById(id)) {
+			tmpCart = carritoRepository.findById(id).get();
+			if (usuario_id != null) tmpCart.setUsuario_id(usuario_id);
+			carritoRepository.save(tmpCart);
+		} else {
+			System.out.println("Update - El producto con id " + id + " no existe");
+		}//else
 		return tmpCart;
-	}//updateCarrito
-	
-	
-	
-	
+	}// updateCarrito
+
 }// class CarritoServices
-
-
-
