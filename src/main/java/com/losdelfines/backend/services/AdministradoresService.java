@@ -1,59 +1,67 @@
 package com.losdelfines.backend.services;
-import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import com.losdelfines.backend.models.Administradores;
+import com.losdelfines.backend.models.CambioContrasena;
+import com.losdelfines.backend.repositories.AdministradoresRepository;
 
 @Service
 public class AdministradoresService {
-	public final ArrayList<Administradores> lista = new ArrayList<>();
+	public final AdministradoresRepository administradoresRepository;
+	@Autowired
+	public AdministradoresService(AdministradoresRepository administradoresRepository) {
+		this.administradoresRepository = administradoresRepository;
+	}//constructor
 	
-	public AdministradoresService() {
-		lista.add(new Administradores( "Said Gama", "said.gama@gmail.com", "said123contrasena"));
-		lista.add(new Administradores("Ariadna Islas", "jaz.islasg@gmail.com", "lacontrasenaes1234"));
-		lista.add(new Administradores("Manuel Amaya", "manuchan@gmail.com", "sequepuedovolar1233"));
-		
-	}//listadd
-	public ArrayList<Administradores> getAllAdministradores(){
-		return lista;
+	@GetMapping
+	public List<Administradores> getAllAdministradores(){
+		return administradoresRepository.findAll();
 	}//todos los administradores
+	
 	public Administradores getAdministradores(Long id) {
-		Administradores tmpAdministradores = null;
-		for (Administradores administradores : lista) {
-			if (administradores.getId() ==id) {
-				tmpAdministradores = administradores;
-			}//getAdmi
-		}//for
-		return tmpAdministradores;
-	}//arraylist
+		return administradoresRepository.findById(id).orElseThrow(
+				() -> new IllegalArgumentException("Administrador con id " + id +" no existe.")
+				);
+	}//getAdmi
     
 	public Administradores deleteAdministradores(long id) {
 		 Administradores tmpAdministradores = null;
-		 for (Administradores administrador : lista) {
-			 if (administrador.getId()==id) {
-				 tmpAdministradores = lista.remove(lista.indexOf(administrador));
-				 break;
-			 }//if
-		 }//foreach
+		 if(administradoresRepository.existsById(id)) {
+			 tmpAdministradores=administradoresRepository.findById(id).get();
+			 administradoresRepository.deleteById(id);
+		 }//if
 		 return tmpAdministradores;
-	 }//deleteadmi
+	 }//deleteadmistradores
 	
-	///
 	 public Administradores addAdministradores(Administradores administrador) {
-		 lista.add(administrador);
-		 return administrador;
-	 }//agregar Admi
+		 Administradores tmpAdministradores=null;
+		 if (administradoresRepository.findByCorreo(administrador.getCorreo()).isEmpty()) {
+			 tmpAdministradores = administradoresRepository.save(administrador);
+		 }//if
+		 return tmpAdministradores;
+	 }//agregar Administrador
 	 
-	 public Administradores updateAdministrador(Long id,String nombre, String correo, String contrasena) {
+	 public Administradores updateAdministrador(Long id,CambioContrasena cambioContrasena) {
 		 Administradores tmpAdministradores = null;
-		 for (Administradores administrador : lista) {
-			 if (administrador.getId()==id) {
-				 if (nombre!=null) administrador.setNombre(nombre);
-				 if (correo!=null) administrador.setCorreo(correo);
-				 if (contrasena!=null) administrador.setContrasena(contrasena);
-				 tmpAdministradores=administrador;
-				 break;
-			 }//if
-		 }//foreach
+			 if (administradoresRepository.existsById(id)) { //si existe
+				 if ( (cambioContrasena.getContrasena() !=null) &&
+						 (cambioContrasena.getContrasena() !=null)) { //password !null
+					 tmpAdministradores = administradoresRepository.findById(id).get();
+					 System.out.println(tmpAdministradores);
+					 System.out.println(cambioContrasena);
+					 if(tmpAdministradores.getContrasena().equals(cambioContrasena.getContrasena())) { //pasword correcto
+						 tmpAdministradores.setContrasena(cambioContrasena.getContrasena());
+						 administradoresRepository.save(tmpAdministradores);
+					 } else {
+						 tmpAdministradores=null;
+					 }//if equals
+				 }// !null
+			 }else {
+				 System.out.println("Update - el usuario con id " + id + " no existe");
+			}//else
 		 return tmpAdministradores;
 	 }//updateProducto
 }//AdmiServie

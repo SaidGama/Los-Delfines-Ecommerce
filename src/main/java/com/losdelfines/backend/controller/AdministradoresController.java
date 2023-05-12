@@ -1,5 +1,6 @@
 package com.losdelfines.backend.controller;
-import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.losdelfines.backend.models.Administradores;
+import com.losdelfines.backend.models.CambioContrasena;
 import com.losdelfines.backend.services.AdministradoresService;
 @RestController
 @RequestMapping (path = "/administradores/") // http://127.0.0.1:8080/administradores
@@ -24,7 +25,7 @@ public class AdministradoresController {
 	}//constructor
 	
 @GetMapping //get en postman
-public ArrayList<Administradores> getAdministradores(){
+public List<Administradores> getAdministradores(){
 	return administradoresService.getAllAdministradores();
 }//getallAdmi
 @GetMapping (path="{admidId}") //seleccionar un id posman
@@ -33,11 +34,9 @@ public Administradores getAdministradores(@PathVariable("admidId") Long id) {
 }//getidAdmi
 @PutMapping  (path="{admiId}") //http://127.0.0.1:8080/api/productos/
 public Administradores updateAdministradores (@PathVariable("admiId") Long id,
-		@RequestParam(required = false) String nombre,
-		@RequestParam(required = false) String correo,
-		@RequestParam(required = false) String contrasena) {
-	return administradoresService.updateAdministrador(id, nombre, correo, contrasena);
-}//actualizarProducto
+		@RequestBody CambioContrasena cambioContrasena){
+	return administradoresService.updateAdministrador(id, cambioContrasena);
+}//actualizarAdministrador
 
 @DeleteMapping (path="{admiId}") //eliminar en psotman 
 public Administradores deleteAdministradores(@PathVariable("admiId") Long id) {
