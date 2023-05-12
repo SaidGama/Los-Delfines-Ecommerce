@@ -20,9 +20,8 @@ public class Categorias {
     private String descripcion;
 
 
-    public Categorias(long id, String nombre, String descripcion) {
+    public Categorias(String nombre, String descripcion) {
         super();
-        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
