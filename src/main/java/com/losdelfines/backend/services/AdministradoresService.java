@@ -53,7 +53,7 @@ public class AdministradoresService {
 					 System.out.println(tmpAdministradores);
 					 System.out.println(cambioContrasena);
 					 if(tmpAdministradores.getContrasena().equals(cambioContrasena.getContrasena())) { //pasword correcto
-						 tmpAdministradores.setContrasena(cambioContrasena.getContrasena());
+						 tmpAdministradores.setContrasena(cambioContrasena.getNewContrasena());
 						 administradoresRepository.save(tmpAdministradores);
 					 } else {
 						 tmpAdministradores=null;
