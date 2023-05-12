@@ -1,28 +1,52 @@
 package com.losdelfines.backend.models;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 //POJO - Plain Old Java Object
+
+@Entity
+@Table(name="usuarios")
 public class Usuarios {
-	private String nombre;
-	private String correo;
-	private String domicilio;
-	private String contraseña;
-	private String telefono;
+	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private long id;
-	private static long total=0;
-	public Usuarios(String nombre, String correo, String domicilio, String contraseña, String telefono) {
+	@Column(nullable=false)
+	private String nombre;
+	@Column(nullable=false)
+	private String correo;
+	@Column(nullable=false)
+	private String domicilio;
+	@Column(nullable=false)
+	private String contrasena;
+	@Column(nullable=false)
+	private String telefono;
+	
+	public Usuarios(long id, String nombre, String correo, String domicilio, String contrasena, String telefono) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.correo = correo;
 		this.domicilio = domicilio;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.telefono = telefono;
-		total++;
-		this.id=Usuarios.total;
 	}//constructor
 	
-	public Usuarios() {	
-		total++;
-		this.id=Usuarios.total;
-	}//constructor default
+	public Usuarios() {}//constructor por default
+
+	public long getId() {
+		return id;
+	}//getId
+
+	public void setId(long id) {
+		this.id = id;
+	}//setId
 
 	public String getNombre() {
 		return nombre;
@@ -42,18 +66,18 @@ public class Usuarios {
 
 	public String getDomicilio() {
 		return domicilio;
-	}//getDomicilio
+	}//getDimicilio
 
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}//setDomicilio
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}//getContraseña
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}//setContraseña
 
 	public String getTelefono() {
@@ -62,28 +86,12 @@ public class Usuarios {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}//set
-
-	public long getId() {
-		return id;
-	}//getId
-
-	public void setId(long id) {
-		this.id = id;
-	}//setId
-
-	public static long getTotal() {
-		return total;
-	}//getTotal
-
-	public static void setTotal(long total) {
-		Usuarios.total = total;
-	}//setTotal
+	}//setTelefono
 
 	@Override
 	public String toString() {
-		return "Usuarios [nombre=" + nombre + ", correo=" + correo + ", domicilio=" + domicilio + ", contraseña="
-				+ contraseña + ", telefono=" + telefono + ", id=" + id + "]";
+		return "Usuarios [id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", domicilio=" + domicilio
+				+ ", contraseña=" + contrasena + ", telefono=" + telefono + "]";
 	}//toString
 	
 }//class Usuarios
