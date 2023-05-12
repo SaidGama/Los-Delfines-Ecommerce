@@ -1,63 +1,63 @@
 package com.losdelfines.backend.services;
 
-import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.losdelfines.backend.models.CambioContrasena;
 import com.losdelfines.backend.models.Usuarios;
+import com.losdelfines.backend.repositories.UsuariosRepository;
 
 @Service
 public class UsuariosServices {
-    private final ArrayList<Usuarios> lista = new ArrayList<>();
+    private final UsuariosRepository usuariosRepository;
     @Autowired
-    public UsuariosServices() {
-    	lista.add(new Usuarios ("Miguel Montes de Oca", "mickey@gmail.com", "Bilbao, Iztapalapa, CDMX", "Parangaricutirimicuaro", "5556575859"));
-    	lista.add(new Usuarios ("Manuel Amaya", "manu@gmail.com", "Yucaltepen, Merida, Yucatán", "Password", "5560616263"));
-    	lista.add(new Usuarios ("Said Gama", "said@gmail.com", "Ecatepec", "Contraseña", "5570717273"));
+    public UsuariosServices(UsuariosRepository usuariosRepository) {
+    	this.usuariosRepository = usuariosRepository;
     }//constructor
     
-    public ArrayList<Usuarios> getAllUsuarios(){
-    	return lista;	
+    public List<Usuarios> getAllUsuarios(){
+    	return usuariosRepository.findAll();	
     	}//getAllUsuarios
     
     public Usuarios getUsuarios(Long id) {
-    	Usuarios tmpUser=null;
-		for (Usuarios usuarios:lista) {//recorre los usuarios de la lista
-			if (usuarios.getId()==id) {
-				return usuarios;
-			}//if
-		}//for
-		return tmpUser;
+    	return usuariosRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("Usuario con id " + id + " no existe.")
+				);
     }//getUsuarios
     
     public Usuarios deleteUsuarios(Long id) {
     	Usuarios tmpUser=null;
-		for (Usuarios usuarios:lista) {//recorre los usuarios de la lista
-			if (usuarios.getId()==id) {
-				tmpUser = lista.remove(lista.indexOf(usuarios));
-				break;
-			}//if
-		}//for
+    	if (usuariosRepository.existsById(id)) {
+			tmpUser=usuariosRepository.findById(id).get();
+			usuariosRepository.deleteById(id);
+		}//if
 		return tmpUser;
 	}//deleteUsuarios
 
 	public Usuarios addUsuarios(Usuarios usuarios) {
-		lista.add(usuarios);
-		return usuarios;
+		Usuarios tmpUser=null;
+		if(usuariosRepository.findByCorreo(usuarios.getCorreo()).isEmpty()) {
+			tmpUser = usuariosRepository.save(usuarios);
+		}//if
+			return tmpUser;
 	}//addUsuarios
 
-	public Usuarios updateUsuarios(Long id, String nombre, String correo, String domicilio, String contraseña, String telefono) {
+	public Usuarios updateUsuarios(Long id, CambioContrasena cambioContrasena) {
 		Usuarios tmpUser = null;
-		for (Usuarios usuarios:lista) {
-			if (usuarios.getId()==id) {
-				if (nombre!=null) usuarios.setNombre(nombre);
-				if (correo!=null) usuarios.setCorreo(correo);
-				if (domicilio!=null) usuarios.setDomicilio(domicilio);
-				if (contraseña!=null) usuarios.setContraseña(contraseña);
-				if (telefono!=null) usuarios.setTelefono(contraseña);
-				tmpUser=usuarios;
-				break;
-			}//if
-		}//for
+		if (usuariosRepository.existsById(id)) { // busca si existe
+			if ( (cambioContrasena.getContrasena() !=null) &&
+				(cambioContrasena.getNewContrasena() !=null) ) { //passwords !null
+				tmpUser=usuariosRepository.findById(id).get();
+				if(tmpUser.getContrasena().equals(cambioContrasena.getContrasena())) {//verifica si es igual
+					tmpUser.setContrasena(cambioContrasena.getNewContrasena());
+					usuariosRepository.save(tmpUser);
+				}else {
+					tmpUser=null;
+				}//if equals
+			}// !null
+		}else {
+			System.out.println("Update - El usuario con id " + id + " no existe." );
+		}//else
 		return tmpUser;
 	}//updateUsuarios
     
