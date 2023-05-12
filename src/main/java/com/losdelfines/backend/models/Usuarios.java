@@ -24,17 +24,17 @@ public class Usuarios {
 	@Column(nullable=false)
 	private String domicilio;
 	@Column(nullable=false)
-	private String contraseña;
+	private String contrasena;
 	@Column(nullable=false)
 	private String telefono;
 	
-	public Usuarios(long id, String nombre, String correo, String domicilio, String contraseña, String telefono) {
+	public Usuarios(long id, String nombre, String correo, String domicilio, String contrasena, String telefono) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.correo = correo;
 		this.domicilio = domicilio;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.telefono = telefono;
 	}//constructor
 	
@@ -72,12 +72,12 @@ public class Usuarios {
 		this.domicilio = domicilio;
 	}//setDomicilio
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}//getContraseña
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}//setContraseña
 
 	public String getTelefono() {
@@ -91,7 +91,7 @@ public class Usuarios {
 	@Override
 	public String toString() {
 		return "Usuarios [id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", domicilio=" + domicilio
-				+ ", contraseña=" + contraseña + ", telefono=" + telefono + "]";
+				+ ", contraseña=" + contrasena + ", telefono=" + telefono + "]";
 	}//toString
 	
 }//class Usuarios
