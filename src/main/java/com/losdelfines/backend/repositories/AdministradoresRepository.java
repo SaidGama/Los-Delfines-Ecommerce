@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository //es un lugar donde guardo datoss
 public interface AdministradoresRepository extends JpaRepository<Administradores, Long>  {
-	Optional<Administradores> findByCorreo(String email);
+	Optional<Administradores> findByCorreo(String correo);
     
 }//interface administradores repo

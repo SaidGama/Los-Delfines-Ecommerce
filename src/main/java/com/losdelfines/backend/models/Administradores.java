@@ -26,8 +26,8 @@ public class Administradores {
         this.correo = correo;
         this. contrasena = contrasena;
     }//constructor
-public Administradores() {
-}//constructordefault
+	public Administradores() {
+	}//constructordefault
 public String getNombre() {
 		return nombre;
 	}//getnombre
