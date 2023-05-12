@@ -19,7 +19,10 @@ public class Usuarios {
 		this.id=Usuarios.total;
 	}//constructor
 	
-	public Usuarios() {	}//constructor default
+	public Usuarios() {	
+		total++;
+		this.id=Usuarios.total;
+	}//constructor default
 
 	public String getNombre() {
 		return nombre;
