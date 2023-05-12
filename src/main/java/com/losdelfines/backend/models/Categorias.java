@@ -1,25 +1,34 @@
 package com.losdelfines.backend.models;
 
-public class Categorias {
-    
-    private long id;
-    private String nombre;
-    private String descripcion;
-    private static long total = 0;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-    public Categorias(long id, String nombre, String descripcion) {
-        this.id = id;
+@Entity
+@Table(name = "categorias")
+public class Categorias {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
+    private long id;
+    @Column(nullable = false)
+    private String nombre;
+    @Column(nullable = false)
+    private String descripcion;
+
+
+    public Categorias(String nombre, String descripcion) {
+        super();
         this.nombre = nombre;
         this.descripcion = descripcion;
-        total++;
-        id = Categorias.total;
-    }
-    
-    public Categorias(){
-        this.id = Categorias.total;
     }
 
+    public Categorias(){
     
+    }    
     public long getId() {
         return id;
     }

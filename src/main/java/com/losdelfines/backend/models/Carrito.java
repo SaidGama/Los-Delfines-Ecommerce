@@ -1,21 +1,30 @@
 package com.losdelfines.backend.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "carrito")
 public class Carrito {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private long id;
+	@Column(nullable = false)
 	private long usuario_id;
-	private static long total = 0;
 
-	public Carrito(long usuario_id) {
+
+	public Carrito(long id, long usuario_id) {
+		super();
+		this.id = id;
 		this.usuario_id = usuario_id;
-		total++;
-		id = Carrito.total;
-	}// constructor
+	}//constructor
 
 	public Carrito() {
-		total++;
-		id = Carrito.total;
 	}// constructor default
 
 	public long getId() {
@@ -34,17 +43,10 @@ public class Carrito {
 		this.usuario_id = usuario_id;
 	}// setUsuario_id
 
-	public static long getTotal() {
-		return total;
-	}// getTotal
-
-	public static void setTotal(long total) {
-		Carrito.total = total;
-	}// setTotal
-
 	@Override
 	public String toString() {
 		return "Carrito [id=" + id + ", usuario_id=" + usuario_id + "]";
-	}// toString
+	}
+
 
 }// Carrito

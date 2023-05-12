@@ -1,57 +1,55 @@
 package com.losdelfines.backend.services;
+
 import com.losdelfines.backend.models.Categorias;
-import java.util.ArrayList;
+import com.losdelfines.backend.repositories.CategoriasRepository;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CategoriasService {
-    public final ArrayList<Categorias> listaCategorias = new ArrayList<>();
 
-    public CategoriasService(){
-        listaCategorias.add(new Categorias(1,"purificador","purificadores de agua"));
-        listaCategorias.add(new Categorias(2,"filtros","filtro para garrafon"));
-    }
+	private final CategoriasRepository categoriasRepository;
 
-    public ArrayList<Categorias> getAllCategorias(){
-        return listaCategorias;
-    }
+    @Autowired
+    public CategoriasService(CategoriasRepository categoriasRepository) {
+		this.categoriasRepository = categoriasRepository;
+	}
+
+	public List<Categorias> getAllCategorias(){
+        return categoriasRepository.findAll();
+    }//get todos
 
     public Categorias getCategoria(Long id) {
-		Categorias tmpCategoria = null;
-		for (Categorias categoria : listaCategorias) {
-			if (categoria.getId() == id) {
-				tmpCategoria = categoria;
-			}
-		}
-		return tmpCategoria;
-	}
+		return categoriasRepository.findById(id).orElseThrow(  
+			()-> new IllegalArgumentException("La categoria con el id: " + id + " no existe.")   );
+	}//get uno especifico
 
     public Categorias deleteCategoria(Long id) {
         Categorias tmpCategoria = null;
-		for (Categorias categoria : listaCategorias) {
-			if (categoria.getId() == id) {
-				tmpCategoria = listaCategorias.remove(listaCategorias.indexOf(categoria));
-				break;
-			}
+		if (categoriasRepository.existsById(id)) {
+			tmpCategoria = categoriasRepository.findById(id).get();
+			categoriasRepository.deleteById(id);
 		}
 		return tmpCategoria;
-    }
+    }//borrar categoria
 
     public Categorias addCategoria(Categorias categoria) {
-		listaCategorias.add(categoria);
-        return categoria;
-    }
+		return categoriasRepository.save(categoria);
+    }//agregar categoria
 
     public Categorias updateCategoria(long id, String nombre, String descripcion) {
 		Categorias tmpCategoria = null;
-		for (Categorias categoria : listaCategorias) {
-			if (categoria.getId()==id) {
-				if (nombre!=null) categoria.setNombre(nombre);
-				if (descripcion!=null) categoria.setDescripcion(descripcion);
-				tmpCategoria = categoria;
-			}
+		if (categoriasRepository.existsById(id)) {
+			tmpCategoria = categoriasRepository.findById(id).get();
+			if (nombre!=null)tmpCategoria.setNombre(nombre);
+			if (descripcion!=null)tmpCategoria.setDescripcion(descripcion);
+			categoriasRepository.save(tmpCategoria);
+		} else {
+			System.out.println("Update - El producto con el id: " + id + " no existe");
 		}
 		return tmpCategoria;
-	}
+	}//actualizar categoria
 
 }
