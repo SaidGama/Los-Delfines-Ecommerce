@@ -1,13 +1,26 @@
 package com.losdelfines.backend.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="productos")
 public class Productos {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique =true, nullable =false)
+	private long id;
+	@Column(nullable = false)
     private String nombre;
     private String descripcion;
     private double precio;
     private long stock;
-    private long id;
-	private static long total=0;
+    
+	//private static long total=0;
     
 	public Productos (String nombre, String descripcion, double precio, long stock) {
 		super();
@@ -15,14 +28,14 @@ public class Productos {
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.stock = stock;
-		total ++;
-		this.id = Productos.total;
+//		total ++;
+//		this.id = Productos.total;
 	}
 	
 	public Productos() {
-		total ++;
-		this.id =(Productos.total);
-	}
+//		total ++;
+//		this.id =(Productos.total);
+	}// constructor default
 	public String getNombre() {
 		return nombre;
 	}
@@ -53,12 +66,7 @@ public class Productos {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public static long getTotal() {
-		return total;
-	}
-	public static void setTotal(long total) {
-		Productos.total = total;
-	}
+	
 	@Override
 	public String toString() {
 		return "Productos [nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", stock="
