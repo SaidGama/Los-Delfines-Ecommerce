@@ -16,7 +16,7 @@ import com.losdelfines.backend.models.Detalle_carrito;
 import com.losdelfines.backend.services.Detalle_CarritoServices;
 
 @RestController
-@RequestMapping(path = "/api/detallecarrito/")
+@RequestMapping(path = "/detallecarrito/")
 public class Detalle_carritoController {
     
 	// CRUD Create - Read - Update - Delate
