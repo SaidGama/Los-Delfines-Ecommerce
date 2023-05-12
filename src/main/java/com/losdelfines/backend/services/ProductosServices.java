@@ -36,7 +36,7 @@ public class ProductosServices {
 		return productosRepository.save(producto);
 	}//addProducto
     
-    public Productos updateProducto(Long id, String nombre, String descripcion, Double precio, Long stock) {
+    public Productos updateProducto(Long id, String nombre, String descripcion, Double precio, Long stock, Long categoria) {
     	Productos tmpProd = null;
 		if(productosRepository.existsById(id)) {
 			tmpProd = productosRepository.findById(id).get();
@@ -44,6 +44,7 @@ public class ProductosServices {
 				if (descripcion!=null)tmpProd.setDescripcion(descripcion);
 				if (stock!=null)tmpProd.setStock(stock);
 				if (precio!=null)tmpProd.setPrecio(precio.doubleValue());
+				if (categoria!=null)tmpProd.setCategorias_id(categoria.longValue());				
 				productosRepository.save(tmpProd);
 			} else {
 				System.out.println("Update - El producto con el id: " + id + " no existe");

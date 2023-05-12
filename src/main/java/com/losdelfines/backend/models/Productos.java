@@ -16,18 +16,24 @@ public class Productos {
 	private long id;
 	@Column(nullable = false)
     private String nombre;
+	@Column(nullable = false)
     private String descripcion;
+	@Column(nullable = false)
     private double precio;
+	@Column(nullable = false)
     private long stock;
+	@Column(nullable = false)
+    private long categorias_id;
     
 	//private static long total=0;
     
-	public Productos (String nombre, String descripcion, double precio, long stock) {
+	public Productos (String nombre, String descripcion, double precio, long stock, long categoria) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.stock = stock;
+		this.categorias_id = categoria;
 //		total ++;
 //		this.id = Productos.total;
 	}
@@ -66,12 +72,18 @@ public class Productos {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+	public long getCategorias_id() {
+		return categorias_id;
+	}
+	public void setCategorias_id(long categorias_id) {
+		this.categorias_id = categorias_id;
+	}
+
 	@Override
 	public String toString() {
-		return "Productos [nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio + ", stock="
-				+ stock + ", id=" + id + "]";
-	}//toString
-	
+		return "Productos [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
+				+ ", stock=" + stock + ", categorias_id=" + categorias_id + "]";
+	}
+
 	
 }//class productos
