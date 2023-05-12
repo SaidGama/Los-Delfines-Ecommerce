@@ -7,27 +7,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 //POJO - Plain Old Java Project
 @Entity
-@Table(name="administradores")
+@Table(name="administradores") // http://127.0.0.1:8080/api/administradores/
 public class Administradores {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
-	private long id;
-	@Column(nullable = false)
+	private Long id;
+	@Column(unique=true, nullable=false)
     private String nombre;
-	@Column(nullable = false)
+	@Column(unique=true, nullable=false)
     private String correo;
-	@Column(nullable = false)
+	@Column(unique=true, nullable=false)
     private String contrasena;
-   
-    public Administradores(String nombre, String correo, String contrasena) {
+    public Administradores(Long id, String nombre, String correo, String contrasena) {
         super();
+        this.id = id;
         this.nombre = nombre;
         this.correo = correo;
         this. contrasena = contrasena;
     }//constructor
-public Administradores() {
-}//constructordefault
+	public Administradores() {
+	}//constructordefault
 public String getNombre() {
 		return nombre;
 	}//getnombre
@@ -60,6 +60,8 @@ public String getNombre() {
 	}//setId
 	@Override
 	public String toString() {
-		return "Administradores [nombre=" + nombre + ", correo=" + correo + ", contrasena=" + contrasena + ", id=" + id + "]";
-	}//to string
+		return "Administradores [id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", contrasena=" + contrasena
+				+ "]";
+	}//toString
+	
 }//class administradores
