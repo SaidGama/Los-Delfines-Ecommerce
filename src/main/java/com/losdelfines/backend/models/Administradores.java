@@ -12,23 +12,23 @@ public class Administradores {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
-	private Long id;
-	@Column(unique=true, nullable=false)
+	private long id;
+	@Column(nullable=false)
     private String nombre;
-	@Column(unique=true, nullable=false)
+	@Column(nullable=false)
     private String correo;
-	@Column(unique=true, nullable=false)
+	@Column(nullable=false)
     private String contrasena;
-    public Administradores(Long id, String nombre, String correo, String contrasena) {
+
+    public Administradores(String nombre, String correo, String contrasena) {
         super();
-        this.id = id;
         this.nombre = nombre;
         this.correo = correo;
-        this. contrasena = contrasena;
+        this.contrasena = contrasena;
     }//constructor
 	public Administradores() {
 	}//constructordefault
-public String getNombre() {
+	public String getNombre() {
 		return nombre;
 	}//getnombre
 

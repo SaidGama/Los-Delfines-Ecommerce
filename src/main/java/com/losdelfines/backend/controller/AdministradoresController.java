@@ -17,6 +17,7 @@ import com.losdelfines.backend.services.AdministradoresService;
 @RequestMapping (path = "/administradores/") // http://127.0.0.1:8080/administradores
 
 public class AdministradoresController {
+
 	private final AdministradoresService administradoresService;
 	
 	@Autowired
@@ -24,27 +25,28 @@ public class AdministradoresController {
 		this.administradoresService = administradoresService;
 	}//constructor
 	
-@GetMapping //get en postman
-public List<Administradores> getAdministradores(){
-	return administradoresService.getAllAdministradores();
-}//getallAdmi
-@GetMapping (path="{admidId}") //seleccionar un id posman
-public Administradores getAdministradores(@PathVariable("admidId") Long id) {
-	return administradoresService.getAdministradores(id);
-}//getidAdmi
-@PutMapping  (path="{admiId}") //http://127.0.0.1:8080/api/productos/
-public Administradores updateAdministradores (@PathVariable("admiId") Long id,
-		@RequestBody CambioContrasena cambioContrasena){
-	return administradoresService.updateAdministrador(id, cambioContrasena);
-}//actualizarAdministrador
+	@GetMapping //get en postman
+	public List<Administradores> getAdministradores(){
+		return administradoresService.getAllAdministradores();
+	}//getallAdmi
+	@GetMapping (path="{admiId}") //seleccionar un id posman
+	public Administradores getAdministradores(@PathVariable("admiId") Long id) {
+		return administradoresService.getAdministradores(id);
+	}//getidAdmi
+	@PutMapping  (path="{admiId}") //http://127.0.0.1:8080/api/productos/
+	public Administradores updateAdministradores (@PathVariable("admiId") Long id,
+			@RequestBody CambioContrasena cambioContrasena){
+		return administradoresService.updateAdministrador(id, cambioContrasena);
+	}//actualizarAdministrador
 
-@DeleteMapping (path="{admiId}") //eliminar en psotman 
-public Administradores deleteAdministradores(@PathVariable("admiId") Long id) {
-	return administradoresService.deleteAdministradores(id);
-}//deleteAdmi
-@PostMapping 
-public Administradores addAdministradores (@RequestBody AdministradoresService administradoresService, Administradores id) {
-	return administradoresService.addAdministradores(id);
-}//addproducto
+	@DeleteMapping (path="{admiId}") //eliminar en psotman 
+	public Administradores deleteAdministradores(@PathVariable("admiId") Long id) {
+		return administradoresService.deleteAdministradores(id);
+	}//deleteAdmi
+
+	@PostMapping 
+	public Administradores addAdministradores (@RequestBody Administradores administrador) {
+		return administradoresService.addAdministradores(administrador);
+	}//addproducto
 
 }//class admi controller
