@@ -22,8 +22,8 @@ public class CategoriasService {
     }//get todos
 
     public Categorias getCategoria(Long id) {
-		return categoriasRepository.findById(id).orElseThrow(
-				()-> new IllegalArgumentException("La categoria con el id: " + id + " no existe."));
+		return categoriasRepository.findById(id).orElseThrow(  
+			()-> new IllegalArgumentException("La categoria con el id: " + id + " no existe.")   );
 	}//get uno especifico
 
     public Categorias deleteCategoria(Long id) {
