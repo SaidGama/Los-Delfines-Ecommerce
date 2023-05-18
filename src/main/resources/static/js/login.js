@@ -209,19 +209,25 @@ botonIngresar.addEventListener("click", function (event) {
     mensajeError += "</ul>";
     errorLoginTexto.insertAdjacentHTML("beforeend", mensajeError);
 
-});//mandar datos de registro
+});//mandar datos de logeo
 
 function validarUsuarioLogin(correo, contra) {
-    if (localStorage.getItem("arrayUsuarios") != null) {
-        arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
-        for (let i = 0; i < arrayUsuarios.length; i++) {
+    let arrayUsuarios = [];
+    fetch(URL_MAIN, { method: 'get' }).then(function(response) { response.json().then(function (json) {
+           console.log(json);
+           console.log(json.length);
+           arrayUsuarios = json;
+           for (let i = 0; i < arrayUsuarios.length; i++) {
             console.log(arrayUsuarios[i]);
-            if ((arrayUsuarios[i]["correo"] === (correo)) && (arrayUsuarios[i]["contraseña"] === contra)) {
+            if ((arrayUsuarios[i].correo === (correo)) && (arrayUsuarios[i].contrasena === contra)) {
                 return true;
             }
         }
-    }
-    return false;
+        });//then
+    }).catch(function(err) {
+       console.log(err);
+    });
+        
 }
 
 function obtenerUsuario(correo) {
