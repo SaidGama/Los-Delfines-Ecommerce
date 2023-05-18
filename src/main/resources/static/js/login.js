@@ -19,7 +19,7 @@ let correoLogin = document.getElementById("correoLogin");
 let contraseñaLogin = document.getElementById("contraseñaLogin");
 let alertInicioSesion = document.getElementById("alertInicioSesion");
 let inicioSesionTexto = document.getElementById("inicioSesionTexto");
-
+const URL_MAIN ='http://127.0.0.1:8080/api/usuarios/';
 botonCrear.addEventListener("click", function (event) {
     event.preventDefault();
     clearTimeout(idTimeout);
@@ -67,15 +67,22 @@ botonCrear.addEventListener("click", function (event) {
     }, 10000);
 
     if (validarNombre() == true && validarCorreo() == true && validarNumero() == true && validarContrasena() == true) {
-        let usuario = `{
-            "IdNombre": "${IdNombre.value}", 
-            "correo": "${correo.value}", 
-            "campNumber": "${campNumber.value}", 
-            "contraseña": "${contraseña.value}"}`;
+        let usuario = {
+            IdNombre: IdNombre.value, 
+            correo: correo.value, 
+            campNumber: campNumber.value, 
+            contraseña: contraseña.value};
 
         if (validarUsuarioRegistrado(correo.value)) {
-            arrayUsuarios.push(JSON.parse(usuario));
-            localStorage.setItem("arrayUsuarios", JSON.stringify(arrayUsuarios));
+            fetch(URL_MAIN, {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },body: JSON.stringify(usuario)}).then(response => response.json()).then(usuario => {
+                    console.log('Success:', usuario);
+                }).catch((error) => {
+                    console.error('Error:', error);
+                });
         } else {
             NombreErrores = "<li>Este correo ya está registrado.</li>";
             alertErrorLogin.style.display = "block";
