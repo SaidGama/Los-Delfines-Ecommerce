@@ -68,10 +68,11 @@ botonCrear.addEventListener("click", function (event) {
 
     if (validarNombre() == true && validarCorreo() == true && validarNumero() == true && validarContrasena() == true) {
         let usuario = {
-            IdNombre: IdNombre.value, 
+            nombre: IdNombre.value, 
+            domicilio: "desconocido",
             correo: correo.value, 
-            campNumber: campNumber.value, 
-            contraseña: contraseña.value};
+            contraseña: contraseña.value, 
+            telefono: campNumber.value};
 
         if (validarUsuarioRegistrado(correo.value)) {
             fetch(URL_MAIN, {
