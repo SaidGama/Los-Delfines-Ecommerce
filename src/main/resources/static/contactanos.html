@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/iconagua.ico.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/StyleContactanos.css">
+    <link rel="stylesheet" href="css/whatsAppIcon.css">
+    <title>Contáctanos</title>
+</head>
+
+<body class="grid-container">
+    <!-- NAVBAR -->
+    <nav class="navbar ">
+        <a href="javascript:void(0);" class="navbar-toggler-icon" onclick="myFunction()">
+
+        </a>
+        <div class="img-container">
+            <img src="./img/Group 13LogoLosD.png" alt="LogoDelfines" class="logoDelfin">
+        </div>
+        <div class="enlaces-container" style="text-align: center;" id="enlacesNav">
+
+        </div>
+        <div class="login-container" style=" text-align: center;" id="botonesNav">
+
+        </div>
+        <div class="navlinksContainer" id="containerDivlinks" style="display: none;">
+            <a href="./productos.html">Productos</a>
+            <a href="./AcercadeNosotros.html">¿Quiénes Somos?</a>
+            <a href="NuestrosServicios.html">Nuestros servicios</a>
+            <a href="./contactanos.html">Contáctanos</a>
+        </div>
+        <div class="topnav" id="topnav" style="border: none;">
+            <div id="myLinks">
+                <a href="./index.html">Inicio</a>
+                <a href="./productos.html">Productos</a>
+                <a href="./AcercadeNosotros.html">¿Quiénes Somos?</a>
+                <a href="NuestrosServicios.html">Nuestros servicios</a>
+                <a href="./contactanos.html">Contáctanos</a>
+            </div>
+        </div>
+    </nav>
+    <!-- CONTENIDO -->
+    <div class="olas">
+        <svg id="wave" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 100" version="1.1"
+            xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+                    <stop stop-color="rgba(61, 113, 187, 1)" offset="0%"></stop>
+                    <stop stop-color="rgba(68.9, 143.977, 250.816, 1)" offset="100%"></stop>
+                </linearGradient>
+            </defs>
+            <path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)"
+                d="M0,70L10,70C20,70,40,70,60,65C80,60,100,50,120,53.3C140,57,160,73,180,73.3C200,73,220,57,240,46.7C260,37,280,33,300,41.7C320,50,340,70,360,76.7C380,83,400,77,420,61.7C440,47,460,23,480,23.3C500,23,520,47,540,53.3C560,60,580,50,600,40C620,30,640,20,660,28.3C680,37,700,63,720,73.3C740,83,760,77,780,66.7C800,57,820,43,840,41.7C860,40,880,50,900,45C920,40,940,20,960,23.3C980,27,1000,53,1020,68.3C1040,83,1060,87,1080,75C1100,63,1120,37,1140,28.3C1160,20,1180,30,1200,41.7C1220,53,1240,67,1260,60C1280,53,1300,27,1320,20C1340,13,1360,27,1380,36.7C1400,47,1420,53,1430,56.7L1440,60L1440,100L1430,100C1420,100,1400,100,1380,100C1360,100,1340,100,1320,100C1300,100,1280,100,1260,100C1240,100,1220,100,1200,100C1180,100,1160,100,1140,100C1120,100,1100,100,1080,100C1060,100,1040,100,1020,100C1000,100,980,100,960,100C940,100,920,100,900,100C880,100,860,100,840,100C820,100,800,100,780,100C760,100,740,100,720,100C700,100,680,100,660,100C640,100,620,100,600,100C580,100,560,100,540,100C520,100,500,100,480,100C460,100,440,100,420,100C400,100,380,100,360,100C340,100,320,100,300,100C280,100,260,100,240,100C220,100,200,100,180,100C160,100,140,100,120,100C100,100,80,100,60,100C40,100,20,100,10,100L0,100Z">
+            </path>
+        </svg>
+    </div>
+    <div class="formulario">
+        <h1 class="tituloCont">Contáctanos</h1>
+        <div class="alert alert-success fade show" style="display:none; width: fit-content; height:fit-content;"
+            role="alert" id="ValidaBoton">
+            <p id="validacionTexto" style="text-align: center;">¡Se envió con éxito el correo!</p>
+        </div>
+        <div class="alert alert-danger fade show" style="display:none;" role="alert" id="alertError">
+            <p id="alertErrorTexto"> </p>
+        </div>
+        <form>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Nombre y Apellido:</label>
+                <input type="text" class="form-control" id="campNombre">
+                <div class="invalid-feedback">Nombre inválido.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="campEmail" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
+                <div class="invalid-feedback">
+                    correo inválido.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Teléfono:</label>
+                <input type="text" class="form-control" id="campTelefono">
+                <div class="invalid-feedback">
+                    Teléfono inválido.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Mensaje:</label>
+                <textarea class="form-control" id="campMensaje" rows="3"></textarea>
+                <div class="invalid-feedback">
+                    Favor de escribir un mensaje.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnEnviar">Enviar</button>
+            <button type="submit" class="btn btn-primary" id="Limpiar">Limpiar</button>
+        </form>
+      
+        <div class="container">
+            <h1 class="tituloCont">Ubicación</h1>
+            <hr>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.1445758111827!2d-89.66377178969627!3d20.986840980571184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f567382c5921507%3A0xc643abcc93bc1637!2sPURIFICADORA%20DE%20AGUA%20LOS%20DELFINES!5e0!3m2!1ses-419!2smx!4v1682363230286!5m2!1ses-419!2smx"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <hr>
+        </div>
+
+    </div>
+
+    <div class="informacion" font-family="Poppins">
+
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <p><img src="img/whatsapppng.png" alt="correo" style="height: 48px; width: 48px;"></p>
+
+
+            <p>Para una atención instantánea puedes enviarnos un mensaje de WhatsApp, atentederemos tu solicitud de
+                inmediato al número: <a href="https://wa.link/5vh20n" target="_blank" style="color: black;"> <u>+52
+                        999 949 35 08</u></a>.</p>
+            <br>
+            <p><img src="img/icons-phone.png" alt="correo"> Llámanos</p>
+            <p>Estamos disponibles de Lunes a Sábado de 8am - 8pm</p>
+            <p>Celular: 9999493508</p>
+            <br>
+
+
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="4000">
+                        <img src="./img/local01.jpg" class="d-block w-100" alt="portadaDatos">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img src="./img/local02.jpg" class="d-block w-100" alt="local">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="4000">
+                        <img src="./img/local03.jpg" class="d-block w-100" alt="local">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <br>
+            <p><img src="img/icons-mail.png" alt="telefono"> Escríbenos </p>
+            <p>Rellena nuestro formulario y nos pondremos en contacto contigo en menos de 24 horas.</p>
+            <p>Email: delfines@gmail.com</p>
+            <p>Emails: soporte@gmail.com</p>
+        </div>
+    </div>
+    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <a href="https://wa.link/5vh20n" class="float" target="_blank">
+  <i class="fa fa-whatsapp my-float"></i>
+  </a>
+    
+
+    <!-- FOOTER -->
+    <footer class="footer1 align-items-center p-3 mb-2 bg-footer text-white">
+
+        <div class="col1 mb-3">
+        </div>
+        <div class="col2 mb-3" id="footerC2">
+
+        </div>
+        <div class="col3 mb-3" id="footerC3">
+
+        </div>
+        <div class="col4 mb-3" id="footerC4">
+
+        </div>
+        <div class="col5 mb-3" id="footerC5">
+
+        </div>
+        <div class="col6 mb-3">
+        </div>
+
+    </footer>
+    <script src="js/contactanos.js"></script>
+    <script src="js/navbarBoton.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <!--Scripts de Bootstrap  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
+        integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

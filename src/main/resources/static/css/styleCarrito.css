@@ -1,0 +1,312 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100%;
+}
+
+html {
+    height: 100%;
+    font-family: 'Poppins';
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    grid-area: navbar;
+    background-color: #3d71bb;
+
+}
+
+.informacion {
+    grid-area: informacion;
+    padding: 50px;
+}
+
+/*VistaCelular*/
+@media(max-width: 899px) {
+    .topnav {
+        background-color: #3d71bb;
+        grid-area: topnav;
+        height: 0;
+    }
+      
+      .topnav #myLinks {
+        display: none;
+      }
+      
+      .topnav a {
+        color: white;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        display: block;
+        text-align: center; 
+      }
+      
+      .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+        transition: .78s;
+        
+      }
+      .navbar-toggler-icon {
+        display: block;
+        margin: 0 auto;
+      }
+    .navbar {
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: 1fr 50% 25%;
+        grid-template-areas:
+            'menuBoton img-container login-container'
+            'topnav     topnav       topnav';
+        height: auto;    
+    }
+
+    .logoDelfin {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    #login {
+       
+        height: 20px;
+        aspect-ratio: 5/8;
+        object-fit: contain;
+     
+    }
+
+    #carrito {
+        
+        height: 20px;
+        aspect-ratio: 6/8;
+        object-fit: contain;
+  
+    }
+
+
+    .menuBoton {
+        grid-area: menuBoton;
+    }
+
+    .img-container {
+        grid-area: img-container;
+    }
+
+    .login-container {
+        grid-area: login-container;
+    display: grid;
+    place-items: center;
+  
+    }
+
+    .lista {
+        list-style-type: none;
+    }
+   
+    .enlaces-container {
+        display: none;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-columns: auto;
+        grid-template-areas:
+            'navbar'
+            'imagenportada'
+            'formulario'
+            'informacion'
+            'footer1';
+        gap: 0px;
+        height: 100%;
+    }
+
+    /* footer */
+    .footer1 {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            'col2 col3'
+            'col4 col5';
+
+        gap: 0px;
+        height: 100%;
+    }
+
+}
+
+/*Escritorio*/
+@media(min-width:900px) {
+
+    .navbar-toggler {
+        display: none;
+    }
+    .navbar-toggler-icon{
+        display: none;
+    }
+    #myLinks{
+        display: none;
+    }
+    .navbar {
+        display: grid;
+        grid-template-rows: 60% 40%;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+        grid-template-areas:
+            '. img-container img-container img-container login-container'
+            '. enlaces-container enlaces-container enlaces-container login-container';
+        height: 270px;
+        width: 100%;
+    }
+
+    /* CSS NAVBAR */
+    .img-container {
+        grid-area: img-container;
+        padding: 15px;
+    }
+
+    .logoDelfin {
+        width: 100%;
+        height: 170px;
+        object-fit: contain;
+    }
+
+    .enlaces-container {
+        grid-area: enlaces-container;
+
+    }
+
+    .login-container {
+        grid-area: login-container;
+    }
+
+    .lista {
+        list-style-type: none;
+        display: inline;
+        object-fit: contain;
+    }
+
+    #login {
+       
+        width: 20px;
+        aspect-ratio: 5/8;
+        object-fit: contain;
+     
+    }
+
+    #carrito {
+        
+        width: 20px;
+        aspect-ratio: 6/8;
+        object-fit: contain;
+  
+    }
+
+
+    .grid-container {
+        display: grid;
+        grid-template-rows: auto auto auto auto;
+        grid-template-columns: 50% 50%;
+        grid-template-areas:
+            'navbar navbar'
+            'imagenportada imagenportada'
+            'formulario  informacion'
+            'footer1 footer1';
+        gap: 0px;
+        height: 100%;
+    }
+
+    .footer1 {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: auto auto auto auto auto auto;
+        grid-template-areas:
+            'col1 col2 col3 col4 col5 col6';
+
+        gap: 0px;
+        height: 100%;
+
+    }
+
+    /* Grid Footer */
+}
+
+
+/*==================CSS FOOTER========================*/
+.bg-footer {
+    background-color: #3D71BB;
+}
+
+.footer1 {
+    grid-area: footer1;
+}
+
+.facebook {
+    grid-area: facebook;
+    width: auto;
+    height: auto;
+}
+
+.instagram {
+    grid-area: instagram;
+    width: auto;
+    height: auto;
+}
+
+.whatsapp {
+    grid-area: whatsapp;
+    width: auto;
+    height: auto;
+}
+
+.col1 {
+    grid-area: col1;
+    padding: auto;
+    text-align: center;
+}
+
+.col2 {
+    grid-area: col2;
+    padding: auto;
+    text-align: center;
+    position: relative;
+    bottom: 15px;
+}
+
+.col3 {
+    grid-area: col3;
+    padding: auto;
+    text-align: center;
+}
+
+.col4 {
+    grid-area: col4;
+    padding: auto;
+    text-align: center;
+}
+
+.col5 {
+    grid-area: col5;
+    padding: auto;
+    text-align: center;
+    position: relative;
+    bottom: 34px
+}
+
+.col6 {
+    grid-area: col6;
+    padding: auto;
+    text-align: center;
+}
+
+/*==================================*/
