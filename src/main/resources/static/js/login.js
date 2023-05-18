@@ -168,17 +168,45 @@ IdNombre.addEventListener("blur", function (event) {
 
 
 function validarUsuarioRegistrado(correo) {
-    if (localStorage.getItem("arrayUsuarios") != null) {
-        arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
-        for (let i = 0; i < arrayUsuarios.length; i++) {
-            console.log(arrayUsuarios[i]);
-            if (arrayUsuarios[i]["correo"].includes(correo)) {
-                return false;
-            }
+ 
+    fetch(URL_MAIN, { method: 'get' }).then(function(response) {
+        response.json().then(function (json) {         
+            for (let i = 0; i < json.length; i++) {
+                //pendiente borrar console.log
+                console.log(json[i]);
+                if (json[i]["correo"].includes(correo)) {
+                    return false;
+                }//if
+            }//for
+       });//then
+    }).catch(function(err) {
+       console.log(err);
+    });
+}
+
+/* fetch(URL_MAIN, { method: 'get' }).then(function(response) {
+    response.json().then(function (json) {
+       console.log(json);
+       console.log(json.length);
+      Array.from(json).forEach( (item) => {
+          addItem(item);
+       }); // foreach
+   });//then
+}).catch(function(err) {
+   console.log(err);
+});
+
+
+if (localStorage.getItem("arrayUsuarios") != null) {
+    arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
+    for (let i = 0; i < arrayUsuarios.length; i++) {
+        console.log(arrayUsuarios[i]);
+        if (arrayUsuarios[i]["correo"].includes(correo)) {
+            return false;
         }
     }
-    return true;
 }
+return true; */
 
 function validarCorreoLogin() {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correoLogin.value) == false) {
