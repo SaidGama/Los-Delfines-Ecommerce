@@ -20,6 +20,7 @@ let contraseñaLogin = document.getElementById("contraseñaLogin");
 let alertInicioSesion = document.getElementById("alertInicioSesion");
 let inicioSesionTexto = document.getElementById("inicioSesionTexto");
 const URL_MAIN ='http://127.0.0.1:8080/api/usuarios/';
+
 botonCrear.addEventListener("click", function (event) {
     event.preventDefault();
     clearTimeout(idTimeout);
@@ -71,11 +72,11 @@ botonCrear.addEventListener("click", function (event) {
             nombre: IdNombre.value, 
             domicilio: "desconocido",
             correo: correo.value, 
-            contraseña: contraseña.value, 
+            contrasena: contraseña.value, 
             telefono: campNumber.value};
-
+        
         if (validarUsuarioRegistrado(correo.value)) {
-            fetch(URL_MAIN, {
+                fetch(URL_MAIN, {
                 method: 'POST', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
@@ -84,23 +85,23 @@ botonCrear.addEventListener("click", function (event) {
                 }).catch((error) => {
                     console.error('Error:', error);
                 });
+                alertExito.style.display = "block";//Se muestra alerta de éxito
+                IdNombre.value = "";//Se limpian campos...
+                correo.value = "";
+                campNumber.value = "";
+                contraseña.value = "";
+                ConfiContraseña.value = "";
+                correoLogin.focus();//se agrega focus al campo del correo del login
+                idTimeout = setTimeout(function () {
+                    alertExito.style.display = "none";
+                }, 10000);
         } else {
             NombreErrores = "<li>Este correo ya está registrado.</li>";
             alertErrorLogin.style.display = "block";
             alertErrorTextoLogin.insertAdjacentHTML("beforeend", NombreErrores);
             correo.style.border = "solid thin red";
         }
-        alertExito.style.display = "block";//Se muestra alerta de éxito
-        IdNombre.value = "";//Se limpian campos...
-        correo.value = "";
-        campNumber.value = "";
-        contraseña.value = "";
-        ConfiContraseña.value = "";
-        correoLogin.focus();//se agrega focus al campo del correo del login
-        idTimeout = setTimeout(function () {
-            alertExito.style.display = "none";
-        }, 10000);
-
+       
     }//mandar datos de registro
 });
 function validarNombre() {
@@ -158,31 +159,25 @@ function validarContrasena() {
     }//if else
 }// confirmarContra*/
 
-function validarDireccion(params) {
-
-}
-IdNombre.addEventListener("blur", function (event) {
-    event.preventDefault;
-    IdNombre.value = IdNombre.value.trim();
-})
-
-
 function validarUsuarioRegistrado(correo) {
- 
     fetch(URL_MAIN, { method: 'get' }).then(function(response) {
-        response.json().then(function (json) {         
-            for (let i = 0; i < json.length; i++) {
-                //pendiente borrar console.log
-                console.log(json[i]);
-                if (json[i]["correo"].includes(correo)) {
-                    return false;
-                }//if
-            }//for
+        response.json().then(function (json) {
+           console.log(json);
+           console.log(json.length);
+            Array.from(json).forEach( (item) => {
+                if (item.correo.includes(correo)) {
+                    return false; // Se encontró el correo, por lo tanto no es válido
+                 }
+            }); // foreach
+            
        });//then
     }).catch(function(err) {
        console.log(err);
     });
 }
+  
+
+
 
 /* fetch(URL_MAIN, { method: 'get' }).then(function(response) {
     response.json().then(function (json) {
@@ -262,8 +257,7 @@ function validarUsuarioLogin(correo, contra) {
         });//then
     }).catch(function(err) {
        console.log(err);
-    });
-        
+    });   
 }
 
 function obtenerUsuario(correo) {
