@@ -19,7 +19,7 @@ let correoLogin = document.getElementById("correoLogin");
 let contraseñaLogin = document.getElementById("contraseñaLogin");
 let alertInicioSesion = document.getElementById("alertInicioSesion");
 let inicioSesionTexto = document.getElementById("inicioSesionTexto");
-
+const URL_MAIN ='http://127.0.0.1:8080/api/usuarios/';
 botonCrear.addEventListener("click", function (event) {
     event.preventDefault();
     clearTimeout(idTimeout);
@@ -67,15 +67,23 @@ botonCrear.addEventListener("click", function (event) {
     }, 10000);
 
     if (validarNombre() == true && validarCorreo() == true && validarNumero() == true && validarContrasena() == true) {
-        let usuario = `{
-            "IdNombre": "${IdNombre.value}", 
-            "correo": "${correo.value}", 
-            "campNumber": "${campNumber.value}", 
-            "contraseña": "${contraseña.value}"}`;
+        let usuario = {
+            nombre: IdNombre.value, 
+            domicilio: "desconocido",
+            correo: correo.value, 
+            contraseña: contraseña.value, 
+            telefono: campNumber.value};
 
         if (validarUsuarioRegistrado(correo.value)) {
-            arrayUsuarios.push(JSON.parse(usuario));
-            localStorage.setItem("arrayUsuarios", JSON.stringify(arrayUsuarios));
+            fetch(URL_MAIN, {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },body: JSON.stringify(usuario)}).then(response => response.json()).then(usuario => {
+                    console.log('Success:', usuario);
+                }).catch((error) => {
+                    console.error('Error:', error);
+                });
         } else {
             NombreErrores = "<li>Este correo ya está registrado.</li>";
             alertErrorLogin.style.display = "block";
@@ -160,17 +168,45 @@ IdNombre.addEventListener("blur", function (event) {
 
 
 function validarUsuarioRegistrado(correo) {
-    if (localStorage.getItem("arrayUsuarios") != null) {
-        arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
-        for (let i = 0; i < arrayUsuarios.length; i++) {
-            console.log(arrayUsuarios[i]);
-            if (arrayUsuarios[i]["correo"].includes(correo)) {
-                return false;
-            }
+ 
+    fetch(URL_MAIN, { method: 'get' }).then(function(response) {
+        response.json().then(function (json) {         
+            for (let i = 0; i < json.length; i++) {
+                //pendiente borrar console.log
+                console.log(json[i]);
+                if (json[i]["correo"].includes(correo)) {
+                    return false;
+                }//if
+            }//for
+       });//then
+    }).catch(function(err) {
+       console.log(err);
+    });
+}
+
+/* fetch(URL_MAIN, { method: 'get' }).then(function(response) {
+    response.json().then(function (json) {
+       console.log(json);
+       console.log(json.length);
+      Array.from(json).forEach( (item) => {
+          addItem(item);
+       }); // foreach
+   });//then
+}).catch(function(err) {
+   console.log(err);
+});
+
+
+if (localStorage.getItem("arrayUsuarios") != null) {
+    arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
+    for (let i = 0; i < arrayUsuarios.length; i++) {
+        console.log(arrayUsuarios[i]);
+        if (arrayUsuarios[i]["correo"].includes(correo)) {
+            return false;
         }
     }
-    return true;
 }
+return true; */
 
 function validarCorreoLogin() {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correoLogin.value) == false) {
