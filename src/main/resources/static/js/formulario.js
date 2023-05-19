@@ -13,7 +13,7 @@ let alertErrorTexto = document.getElementById("alertErrorTexto");
 let idTimeout;
 const URL_MAIN ='http://127.0.0.1:8080/productos/';
 const reader = new FileReader();
-
+let correoUser;
 
 btnCrear.addEventListener("click", function (event) {
     event.preventDefault();
@@ -191,13 +191,66 @@ campDescripcion.addEventListener("blur", function (event) {
     Id.value = Id.value.trim();
 }); //blur*/
 
+const idUsuario = localStorage.getItem("idUsuario");
+const URL_MAIN2 = `http://127.0.0.1:8080/administradores/`;
+const URL_MAIN3 = `http://127.0.0.1:8080/api/usuarios/${idUsuario}`;
+let formularioID = document.getElementById("formularioID");
 
 window.addEventListener("load", function (event) {
-    if (localStorage.getItem("arrayProductos") != null) {
-        arrayProductos = JSON.parse(localStorage.getItem("arrayProductos"));
-    }
+    getUser().then((resultado) => {
+        if (resultado) {
+            checkAdmins().then((resultado) => {
+                if (resultado == false) {
+                    formularioID.style.display = "none"
+                    const itemHTML = `
+                        <div class = "bloqueo" style="padding: 80px;">
+                            <h1>ACCESO DENEGADO</h1>
+                        </div>`;
+                    const denegado = document.getElementById("denegado");
+                    denegado.innerHTML += itemHTML;
+                } 
+            }).catch((error) => {
+                console.log(error);
+            });
+        } else {
+            console.log("error");
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+
+
+
+    
 });
 
+async function checkAdmins() {
+    try {
+        const response = await fetch(URL_MAIN2, { method: 'get' });
+        const json = await response.json();
+        for (let i = 0; i < json.length; i++) {
+            if (json[i].correo == correoUser) {
+                return true;
+            }
+        }
+        return false;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+} 
+
+async function getUser() {
+    try {
+        const response = await fetch(URL_MAIN3, { method: 'get' });
+        const json = await response.json();
+        correoUser = json.correo;
+        return true;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+} 
 
 
 
