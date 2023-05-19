@@ -39,29 +39,57 @@ btnCrear.addEventListener("click", function (event) {
         reader.addEventListener("load", () => {
             // convert image file to base64 string
             src = reader.result;
-            let producto1 = `{
-                            "nombre": "${campNombre.value}", 
-                            "descripcion": "${campDescripcion.value}",  
-                            "precio": "${Precio.value}", 
-                            "stock": "${Stock.value}"},
-                            "imagen": "..." 
-                            }`;
+            
             let producto = {
                                 nombre: campNombre.value, 
                                 descripcion: campDescripcion.value,  
                                 precio: Precio.value, 
                                 stock: Stock.value,
                                 imagen: "imagen.jpg"  
-                        };
+            };
             fetch(URL_MAIN, {
-                method: 'POST', // or 'PUT'
+                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
-                },body: JSON.stringify(producto)}).then(response => response.json()).then(producto => {
-                    console.log('Success:', producto);
-                }).catch((error) => {
-                    console.error('Error:', error);
-                });
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(productos => {
+                // Aquí realizas la validación del nombre
+                const productoExistente = productos.find(producto => producto.nombre === campNombre.value);
+            
+                if (productoExistente) {
+                    alertError.style.display="block";
+                    alertErrorTexto.insertAdjacentHTML("beforeend", "El producto ya existe en la base de datos");
+                    idTimeout = setTimeout(function () {
+                        alertError.style.display = "none";
+                    }, 5000);
+                     
+                    console.log('Error: El producto ya existe en la base de datos');
+
+
+                } else {
+                    // Agregar el producto a la base de datos
+                    fetch(URL_MAIN, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(producto)
+                    })
+                    .then(response => response.json())
+                    .then(producto => {
+                        console.log('Success:', producto);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            
 
         }, false);
 

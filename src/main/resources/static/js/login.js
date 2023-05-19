@@ -20,6 +20,7 @@ let contraseñaLogin = document.getElementById("contraseñaLogin");
 let alertInicioSesion = document.getElementById("alertInicioSesion");
 let inicioSesionTexto = document.getElementById("inicioSesionTexto");
 const URL_MAIN ='http://127.0.0.1:8080/api/usuarios/';
+let arrayValidarRegistro = [];
 
 botonCrear.addEventListener("click", function (event) {
     event.preventDefault();
@@ -69,38 +70,67 @@ botonCrear.addEventListener("click", function (event) {
 
     if (validarNombre() == true && validarCorreo() == true && validarNumero() == true && validarContrasena() == true) {
         let usuario = {
-            nombre: IdNombre.value, 
+            nombre: IdNombre.value,
             domicilio: "desconocido",
-            correo: correo.value, 
-            contrasena: contraseña.value, 
-            telefono: campNumber.value};
-        
-        if (validarUsuarioRegistrado(correo.value)) {
-                fetch(URL_MAIN, {
-                method: 'POST', // or 'PUT'
+            correo: correo.value,
+            contrasena: contraseña.value,
+            telefono: campNumber.value
+          };
+          
+          async function obtenerDatos() {
+            try {
+              const response = await fetch(URL_MAIN, { method: 'get' });
+              const json = await response.json();
+          
+              console.log(json);
+              console.log(json.length);
+          
+              Array.from(json).forEach((item) => {
+                arrayValidarRegistro.push(item);
+              });
+          
+              return arrayValidarRegistro;
+          
+            } catch (err) {
+              console.log(err);
+            }
+          }
+          
+          obtenerDatos().then((arrayValidarRegistro) => {
+            console.log(arrayValidarRegistro);
+          
+            if (validarUsuarioRegistrado(arrayValidarRegistro, usuario)) {
+              fetch(URL_MAIN, {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                },body: JSON.stringify(usuario)}).then(response => response.json()).then(usuario => {
-                    console.log('Success:', usuario);
-                }).catch((error) => {
-                    console.error('Error:', error);
-                });
-                alertExito.style.display = "block";//Se muestra alerta de éxito
-                IdNombre.value = "";//Se limpian campos...
-                correo.value = "";
-                campNumber.value = "";
-                contraseña.value = "";
-                ConfiContraseña.value = "";
-                correoLogin.focus();//se agrega focus al campo del correo del login
-                idTimeout = setTimeout(function () {
-                    alertExito.style.display = "none";
-                }, 10000);
-        } else {
-            NombreErrores = "<li>Este correo ya está registrado.</li>";
-            alertErrorLogin.style.display = "block";
-            alertErrorTextoLogin.insertAdjacentHTML("beforeend", NombreErrores);
-            correo.style.border = "solid thin red";
-        }
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(usuario)
+              }).then(response => response.json()).then(usuario => {
+                console.log('Success:', usuario);
+              }).catch((error) => {
+                console.error('Error:', error);
+              });
+          
+              alertExito.style.display = "block";
+              IdNombre.value = "";
+              correo.value = "";
+              campNumber.value = "";
+              contraseña.value = "";
+              ConfiContraseña.value = "";
+              correoLogin.focus();
+              idTimeout = setTimeout(function () {
+                alertExito.style.display = "none";
+              }, 10000);
+              arrayValidarRegistro = [];
+            } else {
+              NombreErrores = "<li>Este correo ya está registrado.</li>";
+              alertErrorLogin.style.display = "block";
+              alertErrorTextoLogin.insertAdjacentHTML("beforeend", NombreErrores);
+              correo.style.border = "solid thin red";
+              arrayValidarRegistro = [];
+            }
+          });
        
     }//mandar datos de registro
 });
@@ -147,61 +177,14 @@ function validarContrasena() {
     }//if else
 }//validarContrasena
 
-//Al menos una letra mayuscula, una minuscula, un número y que sea minimo de 8 digitos
-/*/function confirmarContra () {
-    console.log(contraseña.value);
-    console.log(ConfiContraseña.value);
-    if ((contraseña.value !== ConfiContraseña.value)) {
-        ConfiContraseña.style.border = "solid thin red";
-    } else {
-        ConfiContraseña.style.border = "solid thin green";
-        return true;
-    }//if else
-}// confirmarContra*/
-
-function validarUsuarioRegistrado(correo) {
-    fetch(URL_MAIN, { method: 'get' }).then(function(response) {
-        response.json().then(function (json) {
-           console.log(json);
-           console.log(json.length);
-            Array.from(json).forEach( (item) => {
-                if (item.correo.includes(correo)) {
-                    return false; // Se encontró el correo, por lo tanto no es válido
-                 }
-            }); // foreach
-            
-       });//then
-    }).catch(function(err) {
-       console.log(err);
-    });
-}
-  
-
-
-
-/* fetch(URL_MAIN, { method: 'get' }).then(function(response) {
-    response.json().then(function (json) {
-       console.log(json);
-       console.log(json.length);
-      Array.from(json).forEach( (item) => {
-          addItem(item);
-       }); // foreach
-   });//then
-}).catch(function(err) {
-   console.log(err);
-});
-
-
-if (localStorage.getItem("arrayUsuarios") != null) {
-    arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
-    for (let i = 0; i < arrayUsuarios.length; i++) {
-        console.log(arrayUsuarios[i]);
-        if (arrayUsuarios[i]["correo"].includes(correo)) {
+function validarUsuarioRegistrado(arrayValidarRegistro, usuario) {
+    for (let i = 0; i < arrayValidarRegistro.length; i++) {
+        if (arrayValidarRegistro[i].correo === usuario.correo) {
             return false;
-        }
+         }
     }
+    return true;
 }
-return true; */
 
 function validarCorreoLogin() {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correoLogin.value) == false) {
@@ -220,49 +203,77 @@ function validarContrasenaLogin() {
     }//if else
 }
 
+
+
+// function validarUsuarioLogin(correo, contra) {
+//     let arrayUsuarios = [];
+//     fetch(URL_MAIN, { method: 'get' }).then(function(response) { response.json().then(function (json) {
+//            console.log(json);
+//            console.log(json.length);
+//            arrayUsuarios = json;
+//            for (let i = 0; i < arrayUsuarios.length; i++) {
+//             console.log(arrayUsuarios[i]);
+//             if ((arrayUsuarios[i].correo === (correo)) && (arrayUsuarios[i].contrasena === contra)) {
+//                 return true;
+//             }
+//         }
+//         });//then
+//     }).catch(function(err) {
+//        console.log(err);
+//     });   
+// }
 botonIngresar.addEventListener("click", function (event) {
     event.preventDefault();
     errorLoginTexto.innerHTML = "";
     errorLogin.style.display = "none";
     let mensajeError = "Los siguientes campos deben ser llenados correctamente:<ul>";
     clearTimeout(idTimeout);
-    if (validarUsuarioLogin(correoLogin.value, contraseñaLogin.value)) {
-        console.log("INICIO DE SESION EXITOSO");
-        window.location.replace("./loading.html");
-    }else {
-        mensajeError += "<li>Correo y/o contraseña incorrectos.</li>";
-        errorLogin.style.display = "block";
-        console.log("correo ya registrado");
-
-        correoLogin.style.border = "solid thin red";
-        contraseñaLogin.style.border = "solid thin red";
-    }
-    mensajeError += "</ul>";
-    errorLoginTexto.insertAdjacentHTML("beforeend", mensajeError);
-
-});//mandar datos de logeo
-
-async function validarUsuarioRegistrado(correo) {
-    try {
-      const response = await fetch(URL_MAIN, { method: 'GET' });
-      if (response.ok) {
-        const usuarios = await response.json();
-        for (let i = 0; i < usuarios.length; i++) {
-          if (usuarios[i].correo === correo) {
-            return false; // El correo ya está registrado
-          }
+  
+    validarUsuarioLogin(correoLogin.value, contraseñaLogin.value)
+      .then((resultado) => {
+        if (resultado) {
+          console.log("INICIO DE SESION EXITOSO");
+          window.location.replace("./loading.html");
+        } else {
+          mensajeError += "<li>Correo y/o contraseña incorrectos.</li>";
+          errorLogin.style.display = "block";
+          console.log("correo ya registrado");
+  
+          correoLogin.style.border = "solid thin red";
+          contraseñaLogin.style.border = "solid thin red";
+  
+          mensajeError += "</ul>";
+          errorLoginTexto.insertAdjacentHTML("beforeend", mensajeError);
         }
-        return true; // El correo no está registrado
-      } else {
-        console.error('Error al obtener la lista de usuarios');
-        return false;
+      })
+      .catch((error) => {
+        console.log(error);
+        // Manejar el error aquí
+      });
+  
+  });
+  async function validarUsuarioLogin(correo, contra) {
+    try {
+      const response = await fetch(URL_MAIN, { method: 'get' });
+      const json = await response.json();
+     
+      console.log(json);
+      console.log(json.length);
+  
+      for (let i = 0; i < json.length; i++) {
+        console.log(json[i]);
+        if (json[i].correo === correo && json[i].contrasena === contra) {
+          return true;
+        }
       }
-    } catch (error) {
-      console.error('Error al realizar la solicitud:', error);
+      return false;
+  
+    } catch (err) {
+      console.log(err);
       return false;
     }
-  }
-
+} 
+  
 function obtenerUsuario(correo) {
     if (localStorage.getItem("arrayUsuarios") != null) {
       arrayUsuarios = JSON.parse(localStorage.getItem("arrayUsuarios"));
