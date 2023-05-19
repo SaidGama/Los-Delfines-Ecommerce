@@ -16,7 +16,7 @@ window.addEventListener("load", function (event) {
     addItems();
 });
 
-const URL_MAIN ='http://127.0.0.1:8080/productos/';
+const URL_MAIN ='https://losdelfinesbackend-production.up.railway.app/productos/';
 function addItems() {
 
    

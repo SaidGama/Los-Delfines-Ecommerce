@@ -17,7 +17,7 @@ let botones = `
                     <a href="./login.html"><img src="./img/login-32.png" alt="login" id="login"  ali: 20px></a>
                 </li>
                 <li>
-                    <a href="./micuenta.html"><img src="./img/vectorlogin.png" alt="carrito" id="carrito"></a>
+                    <a href="./micuenta.html"><img src="./img/Vectorlogin.png" alt="carrito" id="carrito"></a>
                 </li>
             </ul>`
 

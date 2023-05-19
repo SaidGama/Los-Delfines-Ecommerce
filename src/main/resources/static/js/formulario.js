@@ -11,7 +11,7 @@ let src = "";
 let alertError = document.getElementById("alertError");
 let alertErrorTexto = document.getElementById("alertErrorTexto");
 let idTimeout;
-const URL_MAIN ='http://127.0.0.1:8080/productos/';
+const URL_MAIN ='https://losdelfinesbackend-production.up.railway.app/productos/';
 const reader = new FileReader();
 let correoUser;
 
@@ -198,8 +198,8 @@ campDescripcion.addEventListener("blur", function (event) {
 }); //blur*/
 
 const idUsuario = localStorage.getItem("idUsuario");
-const URL_MAIN2 = `http://127.0.0.1:8080/administradores/`;
-const URL_MAIN3 = `http://127.0.0.1:8080/api/usuarios/${idUsuario}`;
+const URL_MAIN2 = `https://losdelfinesbackend-production.up.railway.app/administradores/`;
+const URL_MAIN3 = `https://losdelfinesbackend-production.up.railway.app/api/usuarios/${idUsuario}`;
 let formularioID = document.getElementById("formularioID");
 
 window.addEventListener("load", function (event) {

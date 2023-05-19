@@ -1,7 +1,7 @@
 const idUsuario = localStorage.getItem("idUsuario");
 let nombre;
 let correo;
-const URL_MAIN = `http://127.0.0.1:8080/api/usuarios/${idUsuario}`;
+const URL_MAIN = `https://losdelfinesbackend-production.up.railway.app/api/usuarios/${idUsuario}`;
 
 window.addEventListener("load", function (event) {
     getUsuario().then((resultado) => {
