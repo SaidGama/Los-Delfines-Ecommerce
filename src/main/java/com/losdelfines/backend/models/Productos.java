@@ -24,20 +24,19 @@ public class Productos {
     private long stock;
 	@Column(nullable = false)
     private long categorias_id;
-    
+    @Column(name = "imagen", nullable = false, columnDefinition = "MEDIUMTEXT")
+	private String imagen;
 	//private static long total=0;
     
-	public Productos (String nombre, String descripcion, double precio, long stock, long categoria) {
+	public Productos(String nombre, String descripcion, double precio, long stock, long categorias_id,String imagen) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.stock = stock;
-		this.categorias_id = categoria;
-//		total ++;
-//		this.id = Productos.total;
+		this.categorias_id = categorias_id;
+		this.imagen = imagen;
 	}
-	
 	public Productos() {
 //		total ++;
 //		this.id =(Productos.total);
@@ -78,6 +77,12 @@ public class Productos {
 	public void setCategorias_id(long categorias_id) {
 		this.categorias_id = categorias_id;
 	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 
 	@Override
 	public String toString() {
@@ -85,5 +90,6 @@ public class Productos {
 				+ ", stock=" + stock + ", categorias_id=" + categorias_id + "]";
 	}
 
+	
 	
 }//class productos
