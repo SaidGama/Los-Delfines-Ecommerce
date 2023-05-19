@@ -60,6 +60,12 @@ btnCrear.addEventListener("click", function (event) {
             
                 if (productoExistente) {
                     alertError.style.display="block";
+                     Id.style.border = "solid thin red";
+                     campNombre.style.border = "solid thin red";
+                     Precio.style.border = "solid thin red";
+                     campDescripcion.style.border = "solid thin red";
+                     Stock.style.border = "solid thin red";
+                     inputImagen.style.border = "solid thin red";
                     alertErrorTexto.insertAdjacentHTML("beforeend", "El producto ya existe en la base de datos");
                     idTimeout = setTimeout(function () {
                         alertError.style.display = "none";
