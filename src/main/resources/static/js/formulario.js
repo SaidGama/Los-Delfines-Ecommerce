@@ -45,7 +45,7 @@ btnCrear.addEventListener("click", function (event) {
                                 descripcion: campDescripcion.value,  
                                 precio: Precio.value, 
                                 stock: Stock.value,
-                                imagen: "imagen.jpg"  
+                                imagen: src 
             };
             fetch(URL_MAIN, {
                 method: 'GET',
@@ -60,7 +60,7 @@ btnCrear.addEventListener("click", function (event) {
             
                 if (productoExistente) {
 
-                    
+                    //ALERTA AQUI
                     console.log('Error: El producto ya existe en la base de datos');
 
 

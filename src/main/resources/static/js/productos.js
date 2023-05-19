@@ -41,10 +41,11 @@ function addItem(item) {
     const itemHTML = `
     <div class = "cajitas container">
     <div class="card h-100">
-        <img src="..." class="card-img-top" alt="imagen">
+        <img src="${item.imagen}" class="card-img-top" alt="imagen">
         <div class="card-body">
             <h5 class="card-title">${item.nombre}</h5>
                 <p class="card-text text-justify">${item.descripcion}</p>
+                <p class="card-text text-justify">Stock: ${item.stock}</p>
                 <div style="display: flex; align-items: center; justify-content: space-around;">
                 <a href="#" class="btn btn-primary" id="botonAgregarCarrito">Agregar<br> al carrito</a>
                 <h5 class="card-title" style = "padding-left: 15px; padding-top: 8px;">$${item.precio}</h5>

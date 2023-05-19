@@ -47,9 +47,10 @@ public class ProductosController {
 			@RequestParam(required = false)String descripcion,
 			@RequestParam(required = false)Long stock,
 			@RequestParam(required = false)Double precio,
-			@RequestParam(required = false)Long categoria)
+			@RequestParam(required = false)Long categoria,
+			@RequestParam(required = false)String imagen)
 	{
-			return productosService.updateProducto(id, nombre, descripcion, precio, stock, categoria);
+			return productosService.updateProducto(id, nombre, descripcion, precio, stock, categoria, imagen);
 	}//Update
 	
 }//class ProductosController
