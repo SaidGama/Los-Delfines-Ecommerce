@@ -59,8 +59,12 @@ btnCrear.addEventListener("click", function (event) {
                 const productoExistente = productos.find(producto => producto.nombre === campNombre.value);
             
                 if (productoExistente) {
-
-                    //ALERTA AQUI
+                    alertError.style.display="block";
+                    alertErrorTexto.insertAdjacentHTML("beforeend", "El producto ya existe en la base de datos");
+                    idTimeout = setTimeout(function () {
+                        alertError.style.display = "none";
+                    }, 5000);
+                     
                     console.log('Error: El producto ya existe en la base de datos');
 
 
