@@ -242,23 +242,26 @@ botonIngresar.addEventListener("click", function (event) {
 
 });//mandar datos de logeo
 
-function validarUsuarioLogin(correo, contra) {
-    let arrayUsuarios = [];
-    fetch(URL_MAIN, { method: 'get' }).then(function(response) { response.json().then(function (json) {
-           console.log(json);
-           console.log(json.length);
-           arrayUsuarios = json;
-           for (let i = 0; i < arrayUsuarios.length; i++) {
-            console.log(arrayUsuarios[i]);
-            if ((arrayUsuarios[i].correo === (correo)) && (arrayUsuarios[i].contrasena === contra)) {
-                return true;
-            }
+async function validarUsuarioRegistrado(correo) {
+    try {
+      const response = await fetch(URL_MAIN, { method: 'GET' });
+      if (response.ok) {
+        const usuarios = await response.json();
+        for (let i = 0; i < usuarios.length; i++) {
+          if (usuarios[i].correo === correo) {
+            return false; // El correo ya está registrado
+          }
         }
-        });//then
-    }).catch(function(err) {
-       console.log(err);
-    });   
-}
+        return true; // El correo no está registrado
+      } else {
+        console.error('Error al obtener la lista de usuarios');
+        return false;
+      }
+    } catch (error) {
+      console.error('Error al realizar la solicitud:', error);
+      return false;
+    }
+  }
 
 function obtenerUsuario(correo) {
     if (localStorage.getItem("arrayUsuarios") != null) {
