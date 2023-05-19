@@ -32,7 +32,7 @@ async function getUsuario() {
 
 function view() {
     const itemHTML = `
-        <div class = "micuenta">
+        <div class = "micuenta" style="padding: 100px;>
             <h1>Has iniciado sesion como ${nombre}</h1>
             <h2>Correo electronico: ${correo}</h2>
         </div>`;
