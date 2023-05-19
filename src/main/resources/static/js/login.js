@@ -22,6 +22,7 @@ let inicioSesionTexto = document.getElementById("inicioSesionTexto");
 const URL_MAIN ='http://127.0.0.1:8080/api/usuarios/';
 let arrayValidarRegistro = [];
 
+
 botonCrear.addEventListener("click", function (event) {
     event.preventDefault();
     clearTimeout(idTimeout);
@@ -245,8 +246,7 @@ botonIngresar.addEventListener("click", function (event) {
           mensajeError += "</ul>";
           errorLoginTexto.insertAdjacentHTML("beforeend", mensajeError);
         }
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.log(error);
         // Manejar el error aquí
       });
@@ -263,6 +263,8 @@ botonIngresar.addEventListener("click", function (event) {
       for (let i = 0; i < json.length; i++) {
         console.log(json[i]);
         if (json[i].correo === correo && json[i].contrasena === contra) {
+          const idUsuario = json[i].id;
+          localStorage.setItem("idUsuario", idUsuario);
           return true;
         }
       }
