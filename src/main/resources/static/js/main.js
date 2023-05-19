@@ -29,8 +29,8 @@ let enlacesC2 = `<h5>Soporte</h5>
 let enlacesC3 = `<h5>Cuenta</h5>
 <ul class="nav flex-column">
     <li class="nav-item mb-2"><a href="./micuenta.html" class="nav-link p-0 text-white">Mi cuenta</a></li>
-    <li class="nav-item mb-2"><a href="./micuenta.html" class="nav-link p-0 text-white">Ingresar/Registro</a></li>
-    <li class="nav-item mb-2"><a href="./CarritoCompras.html" class="nav-link p-0 text-white">Carrito</a></li>
+    <li class="nav-item mb-2"><a href="./login.html" class="nav-link p-0 text-white">Ingresar/Registro</a></li>
+    <li class="nav-item mb-2"><a href="./formulario.html" class="nav-link p-0 text-white">Formulario</a></li>
 
 </ul>`;
 let enlacesC4 = ` <h5>Información</h5>
