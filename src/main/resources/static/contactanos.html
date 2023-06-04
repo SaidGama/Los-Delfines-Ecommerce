@@ -60,11 +60,8 @@
         </svg>
     </div>
     <div class="formulario">
-        <h1 class="tituloCont">Contáctanos</h1>
-        <div class="alert alert-success fade show" style="display:none; width: fit-content; height:fit-content;"
-            role="alert" id="ValidaBoton">
-            <p id="validacionTexto" style="text-align: center;">¡Se envió con éxito el correo!</p>
-        </div>
+        <h1 class="tituloCont">Quejas y sugerencias</h1>
+
         <div class="alert alert-danger fade show" style="display:none;" role="alert" id="alertError">
             <p id="alertErrorTexto"> </p>
         </div>
@@ -84,7 +81,7 @@
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Teléfono:</label>
-                <input type="text" class="form-control" id="campTelefono">
+                <input type="text" class="form-control" id="campTelefono" inputmode="numeric" >
                 <div class="invalid-feedback">
                     Teléfono inválido.
                 </div>
@@ -99,9 +96,12 @@
             <button type="submit" class="btn btn-primary" id="btnEnviar">Enviar</button>
             <button type="submit" class="btn btn-primary" id="Limpiar">Limpiar</button>
         </form>
-      
+        <div class="alert alert-success fade show" style="display:none; width: fit-content; height:fit-content; margin-top: 15px;"
+            role="alert" id="ValidaBoton">
+            <p id="validacionTexto" style="text-align: center;">¡Se envió con éxito el correo!</p>
+        </div>
         <div class="container">
-            <h1 class="tituloCont">Ubicación</h1>
+            <h1 class="tituloCont" style="padding: 20px;">Ubicación</h1>
             <hr>
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.1445758111827!2d-89.66377178969627!3d20.986840980571184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f567382c5921507%3A0xc643abcc93bc1637!2sPURIFICADORA%20DE%20AGUA%20LOS%20DELFINES!5e0!3m2!1ses-419!2smx!4v1682363230286!5m2!1ses-419!2smx"
@@ -113,7 +113,7 @@
     </div>
 
     <div class="informacion" font-family="Poppins">
-
+        <h1 class="tituloCont">Contáctanos</h1>
         <div class="shadow p-3 mb-5 bg-white rounded">
             <p><img src="img/whatsapppng.png" alt="correo" style="height: 48px; width: 48px;"></p>
 
@@ -124,7 +124,7 @@
             <br>
             <p><img src="img/icons-phone.png" alt="correo"> Llámanos</p>
             <p>Estamos disponibles de Lunes a Sábado de 8am - 8pm</p>
-            <p>Celular: 9999493508</p>
+            <p>Celular: (999) 949 3508</p>
             <br>
 
 
@@ -154,17 +154,18 @@
 
             <br>
             <p><img src="img/icons-mail.png" alt="telefono"> Escríbenos </p>
-            <p>Rellena nuestro formulario y nos pondremos en contacto contigo en menos de 24 horas.</p>
-            <p>Email: delfines@gmail.com</p>
-            <p>Emails: soporte@gmail.com</p>
+            <p>Rellena nuestro formulario de Quejas y sugerencias y nos pondremos en contacto contigo por correo en
+                menos de 24 horas.</p>
+            <p>Tambien nos puedes contactar al correo: agualosdelfines@yahoo.com.</p>
+
         </div>
     </div>
-    
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <a href="https://wa.link/5vh20n" class="float" target="_blank">
-  <i class="fa fa-whatsapp my-float"></i>
-  </a>
-    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <a href="https://wa.link/5vh20n" class="float" target="_blank">
+        <i class="fa fa-whatsapp my-float"></i>
+    </a>
+
 
     <!-- FOOTER -->
     <footer class="footer1 align-items-center p-3 mb-2 bg-footer text-white">

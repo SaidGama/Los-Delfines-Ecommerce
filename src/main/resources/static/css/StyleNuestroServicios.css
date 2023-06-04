@@ -298,7 +298,7 @@ a {
 }
 
 .card1 {
-    background: linear-gradient(to right , #3d71bb, white);;
+    background: white;
     margin: 10px;
     border-radius: 20px;
     font-family:'Poppins', sans-serif;
@@ -307,7 +307,7 @@ a {
 /*burbujas*/
 .burbuja {
     border-radius: 50%;
-    background: #fff;
+    background: #3d71bb;
     opacity: .4;
 
     position:absolute;

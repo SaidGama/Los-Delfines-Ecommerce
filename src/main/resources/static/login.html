@@ -67,12 +67,12 @@
         <div class="alert alert-danger fade show" style="display:none;" role="alert" id="alertErrorLogin">
             <p id="alertErrorTextoLogin"> </p>
         </div>
-        
+
         <form class="col">
             <div class="row-md-6">
                 <br>
-                <label class="form-label">Nombre completo:</label>
-                <input type="text" class="form-control" id="IdNombre">
+                <label class="form-label ">Nombre completo:</label>
+                <input type="text" class="form-control seccion" id="IdNombre">
             </div>
 
             <div class="row-md-6">
@@ -83,14 +83,35 @@
 
             <div class="row-md-6" style="padding-top: 25px;">
                 <label class="form-label">Número de teléfono:</label>
-                <input type="input" class="form-control" placeholder="ejem.5556575859" id="campNumber">
+                <input type="input" class="form-control" placeholder="Ejem: 9999493508" id="campNumber" inputmode="numeric">
+            </div>
+
+            <div class="row-md-6">
+                <br>
+                <label class="form-label">Dirección:</label>
+                <input type="text" class="form-control"
+                    placeholder="Calle / Número de casa / Cruzamientos / Fraccionamiento" id="direccion">
+                <div id="emailHelp" class="form-text">
+                    Recuerda incluir en tu dirección:
+                    <ul>
+                        <li>Calle.</li>
+                        <li>Número de casa.</li>
+                        <li>Cruzamientos.</li>
+                        <li>Colonia/Fraccionamiento.</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="row-md-6" style="padding-top: 25px;">
                 <label class="form-label">Contraseña:</label>
                 <input type="password" class="form-control" id="Contraseña">
-                <div id="emailHelp" class="form-text">Tu contraseña debe tener al menos:<br>*Una mayúscula.<br>*Una
-                    minúscula.<br>*Un número.<br>*Mínimo 8 caracteres.</div>
+                <div id="emailHelp" class="form-text">Tu contraseña debe tener al menos: <ul>
+                        <li>Una mayúscula.</li>
+                        <li>Una minúscula.</li>
+                        <li>Un número.</li>
+                        <li>Mínimo 8 caracteres.</li>
+                    </ul>
+                </div>
             </div>
             <div class="row-md-6" style="padding-top: 25px;">
                 <label class="form-label">Confirmar tu contraseña:</label>
@@ -105,40 +126,43 @@
                 <button type="add" class="btn btn-primary" id="botonCrear">Regístrate</button>
             </div>
             <br>
-            <div class="alert alert-success" style="display:none;" role="alert" id="alertExito"><!--Se agrega Alert de registro exitoso-->
+            <div class="alert alert-success" style="display:none;" role="alert" id="alertExito">
+                <!--Se agrega Alert de registro exitoso-->
                 <h4 class="alert-heading">¡Fantástico!</h4>
                 <p>¡Tu registro se ha realizado con éxito!</p>
                 <hr>
                 <p class="mb-0">Ahora inicia sesión y comienza a disfrutar de una maravillosa experiencia</p>
             </div>
-            
+
         </form>
     </div>
     <div class="ingresar">
         <div class="shadow p-3 mb-5 bg-white rounded">
-            <h2 class="ingr">INGRESAR</h2>
+            <h2 class="ingr" style="color: #3d71bb;">INGRESAR</h2>
             <br>
             <label class="form-label">Correo:</label>
             <input type="email" class="form-control" placeholder="Ingresa tu correo" id="correoLogin">
             <div class="contraseña">
                 <label class="form-label" style="padding-top: 25px;">Contraseña:</label>
                 <input type="password" class="form-control" placeholder="Contraseña" id="contraseñaLogin">
-                <p class="ingr" style="padding-top: 10px;">¿Olvidaste tu contraseña?</p>
+                <p class="ingr" style="padding-top: 10px;">¿No tienes una cuenta? <a class="ingr" href="#IdNombre" style="color: #3d71bb;">Registrate aquí</a></p>
+                
                 <div class="col-12">
-                    <button type="add" class="btn btn-primary" id="botonIngresar">INGRESAR</button>
+                    <button type="add" class="btn btn-primary" id="botonIngresar">Ingresar</button>
                 </div>
-                <div class="alert alert-danger fade show" style="display: none; padding: 10px;" role="alert"
-                    id="errorLogin">
+                <div class="alert alert-danger fade show" style="display: none; padding: 10px; margin: 10px;"
+                    role="alert" id="errorLogin">
                     <p id="errorLoginTexto"> </p>
                 </div>
-                <div class="alert alert-success" style="display:none;" role="alert" id="alertInicioSesion"><!--Se agrega Alert de registro exitoso-->
+                <div class="alert alert-success" style="display:none;" role="alert" id="alertInicioSesion">
+                    <!--Se agrega Alert de registro exitoso-->
                     <h4 class="alert-heading">¡Haz iniciado sesión!</h4>
                     <h5 id="inicioSesionTexto"></h5>
                 </div>
             </div>
         </div>
         <div class="img">
-            <img src="./img/gota feliz.jpg" width="250" height="250" alt="" >
+            <img src="./img/gota feliz.jpg" width="250" height="250" alt="">
         </div>
     </div>
     <!-- FOOTER -->

@@ -4,6 +4,8 @@
     margin: 0;
 }
 
+
+
 body {
     min-height: 100%;
 }
@@ -13,16 +15,20 @@ body {
 }
 .ingr{
     text-align: center;
-    color: #3d71bb;
+    color: black;
 }
 .tituloLog{
     color: #3D71BB;
 }
 
+.seccion{
+    scroll-margin-top: 6ex ;
+}
 
 html {
     height: 100%;
     font-family:'Poppins';
+    scroll-behavior: smooth;
 }
 
 a {

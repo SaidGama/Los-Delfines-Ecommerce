@@ -60,72 +60,81 @@
 
     <!-- FORMULARIO -->
     <div class="container formulario" id="formularioID">
-        <h1>Agregar productos</h1>
+
 
         <div class="alert alert-danger fade show" style="display:none;" role="alert" id="alertError">
             <p id="alertErrorTexto"></p>
         </div>
         <form class="row g-3">
-            <div class="col-md-6">
+            <!--   <div class="col-md-6">
                 <h2>Identificadores</h2>
                 <br>
                 <label class="form-label">ID:</label>
                 <input type="text"  class="form-control" id="campoId">
                 <label class="form-label">Número de identificación único del producto. Ejemplo: 01</label>
-            </div>
-            <div class="col-md-6">
-                <h2>Descripción</h2>
-                <br>
-                <label class="form-label">Descripción:</label>
-                <input type="description" class="form-control" placeholder="Introduce una breve descripción" id="campDescrip">
-            </div>
+            </div> -->
+            <h2>Descripción</h2>
+            <br>
             <div class="col-md-6">
                 <label class="form-label">Nombre:</label>
                 <input type="nombre" class="form-control" placeholder="Nombre del producto" id="campNombre">
             </div>
-          
+            <div class="col-md-6">
+
+                <label class="form-label">Descripción:</label>
+                <input type="description" class="form-control" placeholder="Introduce una breve descripción"
+                    id="campDescrip">
+            </div>
+
             <div class="col-md-6">
                 <label class="form-label">Stock:</label>
                 <input type="number" placeholder="Cantidad de pzs en existencia" class="form-control" id="valiStock">
             </div>
             <div class="col-md-6">
                 <label class="form-label">Precio:</label>
-                <input type="text" placeholder="Precio del producto" class="form-control" id="CampoPrecios">
+                <input type="number" placeholder="Precio del producto" class="form-control" id="CampoPrecios">
             </div>
             <div class="col-md-6">
-                <label for="formFile" class="form-label">Imagen 1:</label>
+                <label for="formFile" class="form-label">Imagen:</label>
                 <input class="form-control" type="file" id="inputImagen">
             </div>
             <div class="col-12">
                 <button type="add" class="btn btn-primary" id="botonCrear">Agregar</button>
             </div>
         </form>
+        <div class="alert alert-success" style="display:none; margin-top: 15px;" role="alert" id="alertExito">
+            <!--Se agrega Alert de registro exitoso-->
+            <h4 class="alert-heading">¡Fantástico!</h4>
+            <p>¡Tu registro se ha realizado con éxito!</p>
+            <hr>
+            <p class="mb-0">Ahora puedes revisar el nuevo producto en el catálogo de la sección de Productos, ¡Ve a checar! </p>
+        </div>
     </div>
-    <div id="denegado" >
+    <div id="denegado">
 
     </div>
     <!-- FOOTER -->
     <footer class="footer1 align-items-center p-3 mb-2 bg-footer text-white">
 
         <div class="col1 mb-3">
-        </div>  
+        </div>
         <div class="col2 mb-3" id="footerC2">
-           
+
         </div>
         <div class="col3 mb-3" id="footerC3">
-            
+
         </div>
         <div class="col4 mb-3" id="footerC4">
-           
+
         </div>
         <div class="col5 mb-3" id="footerC5">
-            
+
         </div>
         <div class="col6 mb-3">
         </div>
 
     </footer>
-    
+
     <script src="./js/main.js"></script>
     <script src="./js/formulario.js"></script>
     <script src="js/navbarBoton.js"></script>
@@ -143,4 +152,3 @@
 </body>
 
 </html>
-

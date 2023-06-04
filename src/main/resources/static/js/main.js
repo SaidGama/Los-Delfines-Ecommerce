@@ -24,8 +24,8 @@ let botones = `
 let enlacesC2 = `<h5>Soporte</h5>
 <ul class="nav flex-column">
     <li class="nav-item mb-2"><a href="./contactanos.html" class="nav-link p-0 text-white">Contáctanos</a></li>
-    <li class="nav-item mb-2"><a href="https://wa.me/9999506963" target="_blank" class="nav-link p-0 text-white">+52 999 950 6963</a></li>
-</ul>`;
+    <li class="nav-item mb-2"><a href="https://wa.me/9999493508" target="_blank" class="nav-link p-0 text-white">+52 999 949 3508</a></li>
+    </ul>`;
 let enlacesC3 = `<h5>Cuenta</h5>
 <ul class="nav flex-column">
     <li class="nav-item mb-2"><a href="./micuenta.html" class="nav-link p-0 text-white">Mi cuenta</a></li>
@@ -41,7 +41,7 @@ let enlacesC4 = ` <h5>Información</h5>
 </ul>`
 let enlacesC5 = `<h5>Redes Sociales</h5>
 <a href="https://www.facebook.com/edithaguadelfines?mibextid=ZbWKwL" target="_blank"><img src="./img/Facebook.png" alt="Icono" width="50px" height="50px" id="facebook" class="facebook"></a>
-<a href="https://www.instagram.com/" target="_blank"><img src="./img/icon-instagram.png" alt="Icono" width="50px" height="50px" class="instagram"></a>
+
 <a href="https://wa.me/9999493508" target="_blank"><img src="./img/whatsapp.png" alt="Icono" width="50px" height="50px" class="whatsapp"></a>`
 
 window.addEventListener("load", function (event) {
