@@ -80,8 +80,8 @@ botonCrear.addEventListener("click", function (event) {
   if (validarNombre() == true && validarCorreo() == true && validarNumero() == true && validarContrasena() == true && validarDireccion() == true) {
     let usuario = {
       nombre: IdNombre.value,
-      domicilio: direccion.value,
       correo: correo.value,
+      domicilio: direccion.value,
       contrasena: contraseña.value,
       telefono: campNumber.value
     };
