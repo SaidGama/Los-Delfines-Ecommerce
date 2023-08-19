@@ -3,7 +3,7 @@ idUsuario = localStorage.getItem("idUsuario");
 let mensaje = document.getElementById("mensaje");
 let nombre;
 let correo;
-const URL_MAIN = `http://127.0.0.1:8080/usuarios/${idUsuario}`;
+const URL_MAIN = `http://localhost:8080/usuarios/${idUsuario}`;
 let botonCerrar = document.getElementById("botonCerrarSesion");
 
 

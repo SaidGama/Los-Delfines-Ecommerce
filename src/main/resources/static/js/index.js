@@ -27,7 +27,7 @@
 // addItem(produc1);
 // addItem(produc2);
 // addItem(produc3);
-const URL_MAIN = 'http://127.0.0.1:8080/usuarios/';
+const URL_MAIN = 'http://localhost:8080/usuarios/';
 
 window.addEventListener('load', function() {
   const idUsuario = localStorage.getItem('idUsuario');

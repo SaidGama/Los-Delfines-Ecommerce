@@ -11,7 +11,7 @@ let src = "";
 let alertError = document.getElementById("alertError");
 let alertErrorTexto = document.getElementById("alertErrorTexto");
 let idTimeout;
-const URL_MAIN = 'http://127.0.0.1:8080/productos/';
+const URL_MAIN = 'http://localhost:8080/productos/';
 const reader = new FileReader();
 let correoUser;
 

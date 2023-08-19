@@ -21,7 +21,7 @@ let correoLogin = document.getElementById("correoLogin");
 let contraseñaLogin = document.getElementById("contraseñaLogin");
 let alertInicioSesion = document.getElementById("alertInicioSesion");
 let inicioSesionTexto = document.getElementById("inicioSesionTexto");
-const URL_MAIN = 'http://127.0.0.1:8080/usuarios/';
+const URL_MAIN = 'http://localhost:8080/usuarios/';
 let arrayValidarRegistro = [];
 
 
