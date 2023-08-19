@@ -19,7 +19,7 @@ import com.losdelfines.backend.services.UsuariosServices;
 //HTTP     POST      - GET      - PUT         - DELETE
 
 @RestController
-@RequestMapping (path="/api/usuarios/")
+@RequestMapping (path="/usuarios/")
 public class UsuariosController {
 	private final UsuariosServices usuariosServices;
 

@@ -206,8 +206,8 @@ campDescripcion.addEventListener("blur", function (event) {
 }); //blur*/
 
 const idUsuario = localStorage.getItem("idUsuario");
-const URL_MAIN2 = `http://127.0.0.1:8080/administradores/`;
-const URL_MAIN3 = `http://127.0.0.1:8080/usuarios/${idUsuario}`;
+const URL_MAIN2 = `http://localhost:8080/administradores/`;
+const URL_MAIN3 = `http://localhost:8080/usuarios/${idUsuario}`;
 let formularioID = document.getElementById("formularioID");
 
 window.addEventListener("load", function (event) {
