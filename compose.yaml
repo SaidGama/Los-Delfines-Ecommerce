@@ -1,15 +1,15 @@
 services:
 
   losdelfines:
-    build: ./
+    build: SpringApp
     ports:
       - 8080:8080
     secrets:
       - db-password
     depends_on:
-      - db
+      - database
 
-  db:
+  database:
     image: mysql
     restart: always
     secrets:
