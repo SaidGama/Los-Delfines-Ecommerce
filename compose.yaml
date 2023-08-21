@@ -1,31 +1,29 @@
 services:
 
-  losdelfines:
-    build: ./
+  springapp:
+    build: SpringApp
     ports:
       - 8080:8080
-    secrets:
-      - db-password
     depends_on:
-      - db
+      - database
+    environment:
+      - MYSQL_HOST=${MYSQL_HOST}
+      - PROD_DB_PORT=${PROD_DB_PORT}
+      - PROD_DB_NAME=${PROD_DB_NAME}
+      - PROD_DB_USERNAME=${PROD_DB_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
-  db:
+
+  database:
     image: mysql
     restart: always
-    secrets:
-      - db-password
     volumes:
       - db-data:/var/lib/mysql
     environment:
-      - MYSQL_DATABASE=losdelfinesdb
-      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+      - MYSQL_DATABASE=${PROD_DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
     expose:
       - 3306
-      - 33060
 
 volumes:
   db-data:
-
-secrets:
-  db-password:
-    file: db/password.txt

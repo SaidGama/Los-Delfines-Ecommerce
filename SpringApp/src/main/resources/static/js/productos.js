@@ -14,7 +14,9 @@ let idUsuario;
 idUsuario = localStorage.getItem("idUsuario");
 let nombre;
 let correo;
-const URL_MAINUser = `http://localhost:8080/usuarios/${idUsuario}`;
+const URL_MAINUser = `/usuarios/${idUsuario}`;
+//const URL_MAINUser = `http://localhost:8080/usuarios/${idUsuario}`;
+
 let spinner = document.getElementById("spinner");
 
 if (localStorage.getItem('idUsuario')) {
@@ -28,7 +30,9 @@ if (localStorage.getItem('idUsuario')) {
     });
 }
 
-const URL_MAIN = 'http://localhost:8080/productos/';
+const URL_MAIN = '/productos/';
+//const URL_MAIN = 'http://localhost:8080/productos/';
+
 function addItems() {
 
     fetch(URL_MAIN, { method: 'get' }).then(function (response) {

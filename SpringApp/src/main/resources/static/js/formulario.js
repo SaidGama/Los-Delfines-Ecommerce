@@ -11,7 +11,8 @@ let src = "";
 let alertError = document.getElementById("alertError");
 let alertErrorTexto = document.getElementById("alertErrorTexto");
 let idTimeout;
-const URL_MAIN = 'http://localhost:8080/productos/';
+const URL_MAIN = '/productos/';
+//const URL_MAIN = 'http://localhost:8080/productos/';
 const reader = new FileReader();
 let correoUser;
 
@@ -206,8 +207,10 @@ campDescripcion.addEventListener("blur", function (event) {
 }); //blur*/
 
 const idUsuario = localStorage.getItem("idUsuario");
-const URL_MAIN2 = `http://localhost:8080/administradores/`;
-const URL_MAIN3 = `http://localhost:8080/usuarios/${idUsuario}`;
+//const URL_MAIN2 = `http://localhost:8080/administradores/`;
+const URL_MAIN2 = `/administradores/`;
+const URL_MAIN3 = `/usuarios/${idUsuario}`;
+//const URL_MAIN3 = `http://localhost:8080/usuarios/${idUsuario}`;
 let formularioID = document.getElementById("formularioID");
 
 window.addEventListener("load", function (event) {

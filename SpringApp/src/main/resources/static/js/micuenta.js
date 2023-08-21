@@ -3,7 +3,9 @@ idUsuario = localStorage.getItem("idUsuario");
 let mensaje = document.getElementById("mensaje");
 let nombre;
 let correo;
-const URL_MAIN = `http://localhost:8080/usuarios/${idUsuario}`;
+const URL_MAIN = `/usuarios/${idUsuario}`;
+//const URL_MAIN = `http://localhost:8080/usuarios/${idUsuario}`;
+
 let botonCerrar = document.getElementById("botonCerrarSesion");
 
 
