@@ -1,6 +1,6 @@
 FROM amazoncorretto:11
 
-WORKDIR /SpringApp
+WORKDIR /LosDelfinesBackend
 
 EXPOSE 8080
 
