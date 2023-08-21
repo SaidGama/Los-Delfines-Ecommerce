@@ -1,9 +1,15 @@
 # LosDelfinesEcommerce
+![Sitio Web](/captura.png "Captura del sitio web")
+
 Este proyecto ha sido desarrollado para una purificadora ubicada en Yucatán, México.
+
+La aplicacion esta funcionando en la nube y puedes acceder con la url: 
+-http://losdelfines.us-east-1.elasticbeanstalk.com/
+
 
 El proyecto utiliza dos contenedores Docker para su ejecución.
 
-Si deseas ejecutar la aplicación web, sigue estos pasos:
+Si deseas ejecutar la aplicación localmente, sigue estos pasos:
 1. Descarga e instala Docker en tu computadora.
 2. Descarga o clona el proyecto desde el repositorio.
 3. Abre el archivo .env y modifica las variables que se indican en el archivo.
